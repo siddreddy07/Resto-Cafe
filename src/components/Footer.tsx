@@ -60,8 +60,8 @@ export default function Footer() {
             </div>
           </div>
           <div className="hidden md:flex flex-col absolute -bottom-10 left-0 select-none pointer-events-none">
-            <span className="text-[12vw] leading-[0.6] font-display font-black tracking-[-0.1em] text-brand-white/[0.015] uppercase">WILD</span>
-            <span className="text-[12vw] leading-[0.6] font-display font-black tracking-[-0.1em] text-brand-white/[0.015] uppercase">GOAT</span>
+            <span className="text-[12vw] lg:text-[10vw] xl:text-[8vw] leading-[0.5] font-display font-black tracking-[-0.11em] text-brand-white/[0.015] uppercase">WILD</span>
+            <span className="text-[12vw] lg:text-[10vw] xl:text-[8vw] leading-[0.5] font-display font-black tracking-[-0.11em] text-brand-white/[0.015] uppercase">GOAT</span>
           </div>
         </div>
       </div>

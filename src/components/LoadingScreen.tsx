@@ -133,7 +133,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col items-center leading-[0.6] font-display font-black uppercase tracking-[-0.1em] text-[#FFFFFF]"
+                  className="flex flex-col items-center leading-[0.5] font-display font-black uppercase tracking-[-0.11em] text-[#FFFFFF]"
                 >
                   <span className="text-6xl md:text-7xl">WILD</span>
                   <span className="text-6xl md:text-7xl">GOAT</span>

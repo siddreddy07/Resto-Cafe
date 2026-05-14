@@ -15,8 +15,8 @@ export default function LocationSection() {
           <span className="text-xs font-bold tracking-[0.4em] uppercase text-brand-white/40 mb-4 block">
             Visit Us
           </span>
-          <h2 className="text-5xl md:text-7xl font-display font-black tracking-tighter mb-12">
-            HYDERABAD <br /> 400 036
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black tracking-tighter mb-8 md:mb-12">
+            HYDERABAD <br className="hidden md:block" /> 400 036
           </h2>
 
           <div className="space-y-12">
@@ -76,7 +76,7 @@ export default function LocationSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="relative h-[500px] lg:h-[600px] overflow-hidden rounded-[3rem] bg-brand-white/5 border border-brand-white/10"
+          className="relative h-[400px] sm:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-brand-white/5 border border-brand-white/10"
         >
           <div className="absolute inset-0 grayscale hover:grayscale-0 transition-all duration-1000 opacity-80 hover:opacity-100">
             <Map 

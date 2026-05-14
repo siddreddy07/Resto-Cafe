@@ -33,9 +33,9 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 md:px-12 lg:px-20 h-20"
       >
         <div className="flex items-center gap-10 lg:gap-16">
-          <Link to="/" className="flex flex-col items-center leading-[0.6] hover:opacity-80 transition-all shrink-0">
-            <span className="text-xl md:text-2xl font-display font-black tracking-[-0.1em] text-brand-white">WILD</span>
-            <span className="text-xl md:text-2xl font-display font-black tracking-[-0.1em] text-brand-white">GOAT</span>
+          <Link to="/" className="flex flex-col items-center leading-[0.5] hover:opacity-80 transition-all shrink-0">
+            <span className="text-xl md:text-2xl font-display font-black tracking-[-0.11em] text-brand-white">WILD</span>
+            <span className="text-xl md:text-2xl font-display font-black tracking-[-0.11em] text-brand-white">GOAT</span>
           </Link>
           <div className="hidden md:flex items-center gap-6 lg:gap-8 text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/40">
             <Link to="/" className="hover:text-brand-white transition-all whitespace-nowrap">Home</Link>

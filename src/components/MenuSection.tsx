@@ -7,6 +7,7 @@ import { MENU_CATEGORIES } from "../constants";
 export default function MenuSection() {
   const [activeCategory, setActiveCategory] = useState(MENU_CATEGORIES[0].id);
   const [hoveredItem, setHoveredItem] = useState<{ name: string; image: string } | null>(null);
+  const [selectedItem, setSelectedItem] = useState<typeof MENU_CATEGORIES[0]["items"][0] | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -88,12 +89,12 @@ export default function MenuSection() {
           THE MENU
         </motion.h2>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8 overflow-x-auto pb-4 max-w-full">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 lg:gap-6 overflow-x-auto pb-4 max-w-full">
           {MENU_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`relative px-4 py-2 text-sm font-bold uppercase tracking-widest transition-all ${
+              className={`relative px-4 py-2 text-sm lg:text-xs font-bold uppercase tracking-widest transition-all ${
                 activeCategory === cat.id ? "text-brand-white" : "text-brand-white/30 hover:text-brand-white/60"
               }`}
             >
@@ -111,32 +112,33 @@ export default function MenuSection() {
       </div>
 
       <div className="max-w-5xl mx-auto">
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16"
-        >
-          {MENU_CATEGORIES.find((c) => c.id === activeCategory)?.items.map((item, idx) => (
-            <motion.div 
-              key={idx} 
-              className="group relative"
-              onMouseEnter={() => setHoveredItem({ name: item.name, image: item.image })}
-              onMouseLeave={() => setHoveredItem(null)}
-            >
-              <div className="flex justify-between items-baseline mb-3 pb-3 border-b border-brand-white/5 group-hover:border-brand-white/40 transition-all duration-500">
-                <h3 className="text-xl md:text-2xl font-display font-medium text-brand-white uppercase tracking-tighter group-hover:pl-4 transition-all duration-500">
-                  {item.name}
-                </h3>
-                <span className="text-brand-white font-display font-bold text-lg">₹{item.price}</span>
-              </div>
-              <p className="text-sm font-light text-brand-white/40 leading-relaxed italic group-hover:text-brand-white/70 transition-colors">
-                {item.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-24 lg:gap-x-12 xl:gap-x-16 gap-y-16 lg:gap-y-10 xl:gap-y-8"
+          >
+            {MENU_CATEGORIES.find((c) => c.id === activeCategory)?.items.map((item, idx) => (
+              <motion.div 
+                key={idx} 
+                className="group relative cursor-pointer"
+                onMouseEnter={() => setHoveredItem({ name: item.name, image: item.image })}
+                onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => setSelectedItem(item)}
+              >
+                <div className="flex justify-between items-baseline mb-3 pb-3 border-b border-brand-white/5 group-hover:border-brand-white/40 transition-all duration-500">
+                  <h3 className="text-xl md:text-2xl lg:text-base xl:text-sm font-display font-medium text-brand-white uppercase tracking-tighter group-hover:pl-4 transition-all duration-500">
+                    {item.name}
+                  </h3>
+                  <span className="text-brand-white font-display font-bold text-lg lg:text-sm xl:text-xs">₹{item.price}</span>
+                </div>
+                <p className="text-sm lg:text-xs font-light text-brand-white/40 leading-relaxed italic group-hover:text-brand-white/70 transition-colors">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
       </div>
 
       <div className="mt-24 flex flex-col items-center gap-8">
@@ -157,6 +159,60 @@ export default function MenuSection() {
           High-Definition Textures & Handcrafted Flavors
         </p>
       </div>
+
+      {/* Item Detail Modal */}
+      <AnimatePresence>
+        {selectedItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-brand-black/90 backdrop-blur-xl"
+            onClick={() => setSelectedItem(null)}
+          >
+              <motion.div
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                className="bg-brand-gray/50 border border-brand-white/10 p-4 md:p-8 lg:p-6 xl:p-4 rounded-[2rem] max-w-2xl lg:max-w-lg xl:max-w-md w-full relative overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button 
+                  onClick={() => setSelectedItem(null)}
+                  className="absolute top-6 right-6 z-10 w-8 h-8 md:w-10 md:h-10 bg-brand-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-brand-white hover:bg-brand-white hover:text-brand-black transition-all"
+                >
+                  <ChevronRight className="rotate-180 w-4 h-4 md:w-5 md:h-5" />
+                </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-6 xl:gap-4 items-center">
+                  <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={selectedItem.image} 
+                      alt={selectedItem.name} 
+                      className="w-full h-full object-cover" 
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="space-y-6 lg:space-y-4">
+                    <div>
+                      <span className="text-[10px] lg:text-[8px] font-black tracking-[0.5em] uppercase text-brand-accent">Wild Selection</span>
+                      <h3 className="text-3xl md:text-4xl lg:text-2xl xl:text-xl font-display font-black text-brand-white uppercase mt-2 tracking-tighter">
+                        {selectedItem.name}
+                      </h3>
+                    </div>
+                    <p className="text-brand-white/60 text-base md:text-lg lg:text-sm xl:text-xs italic leading-relaxed">
+                      "{selectedItem.description}"
+                    </p>
+                    <div className="pt-6 lg:pt-4 border-t border-brand-white/10 flex justify-between items-center">
+                      <span className="text-[10px] lg:text-[8px] font-black uppercase tracking-[0.3em] text-brand-white/40">Value</span>
+                      <span className="text-2xl lg:text-xl xl:text-lg font-display font-bold text-brand-white">₹{selectedItem.price}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
