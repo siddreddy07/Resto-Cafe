@@ -32,14 +32,16 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
       setProgress((oldProgress) => {
         if (oldProgress === 100) {
           clearInterval(timer);
+          // Smoother sequence: shorter wait before fade, then complete
           setTimeout(() => {
             setShow(false);
-            setTimeout(onComplete, 1000);
-          }, 800);
+            // Wait for the exit duration to complete before calling onComplete
+            setTimeout(onComplete, 1200);
+          }, 400);
           return 100;
         }
         
-        const diff = Math.random() * 8;
+        const diff = Math.random() * 6; // Slower, more "brewed" pace
         const next = Math.min(oldProgress + diff, 100);
         
         const nextMsg = Math.floor((next / 100) * LOADING_MESSAGES.length);
@@ -50,7 +52,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
         
         return next;
       });
-    }, 150);
+    }, 120);
 
     return () => clearInterval(timer);
   }, [onComplete]);
@@ -63,130 +65,105 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ 
-            clipPath: "circle(0% at 50% 50%)",
-            transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] } 
+            opacity: 0,
+            scale: 1.05,
+            filter: "blur(20px)",
+            transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } 
           }}
-          className="fixed inset-0 z-[100] bg-[#0C0B0A] flex flex-col items-center justify-center p-6 overflow-hidden"
+          className="fixed inset-0 z-[100] bg-[#0A0908] flex flex-col items-center justify-center p-6 overflow-hidden"
         >
-          {/* Warm Ambient Glows */}
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+          {/* Subtle Texture */}
+          <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
           
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.15, 0.1],
-            }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-0 left-0 w-full h-full bg-[#3D2B1F]/20 blur-[120px] rounded-full pointer-events-none"
-          />
+          {/* Central Experience */}
+          <div className="relative flex flex-col items-center max-w-sm w-full gap-24">
+            {/* The "Vessel" */}
+            <div className="relative w-32 h-32 flex items-center justify-center">
+              {/* Coffee Stream / Steam */}
+              <div className="absolute top-[-100px] w-[1px] h-20 bg-gradient-to-b from-transparent via-brand-accent/20 to-brand-accent/40" />
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={iconIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-brand-accent"
+                >
+                  <CurrentIcon size={40} strokeWidth={1.5} />
+                </motion.div>
+              </AnimatePresence>
 
-          <div className="relative flex flex-col items-center max-w-sm w-full gap-16">
-            {/* The "Aroma" Experience */}
-            <div className="relative w-40 h-40 flex items-center justify-center">
-              {/* Rising Aroma Particles (Steam) */}
-              {[...Array(6)].map((_, i) => (
+              {/* Liquid Level Indicator (Creative Progress) */}
+              <div className="absolute bottom-0 w-16 h-[2px] bg-brand-white/10 overflow-hidden">
+                <motion.div 
+                  className="h-full bg-brand-accent shadow-[0_0_10px_#FFFF00]"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+
+              {/* Rising Aroma Particles */}
+              {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={i}
-                  initial={{ y: 20, opacity: 0, scale: 0.5 }}
+                  initial={{ y: 0, opacity: 0 }}
                   animate={{ 
-                    y: -100 - (Math.random() * 40), 
-                    opacity: [0, 1, 0],
-                    x: (Math.random() * 60) - 30,
-                    rotate: (Math.random() * 360)
+                    y: -120, 
+                    opacity: [0, 0.4, 0],
+                    x: (i - 1.5) * 20
                   }}
                   transition={{ 
-                    duration: 3 + Math.random(), 
+                    duration: 2.5, 
                     repeat: Infinity, 
-                    delay: i * 0.6,
+                    delay: i * 0.5,
                     ease: "easeOut"
                   }}
-                  className="absolute text-brand-accent/40"
+                  className="absolute bottom-4"
                 >
-                  {i % 2 === 0 ? <Heart size={12} className="fill-current" /> : <Sparkles size={14} />}
+                  <Sparkles size={8} className="text-brand-accent/30" />
                 </motion.div>
               ))}
-
-              {/* Central Iconic Vessel */}
-              <motion.div
-                animate={{ 
-                  y: [0, -8, 0],
-                  rotate: [-1, 1, -1]
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10 w-28 h-28 flex items-center justify-center"
-              >
-                <div className="absolute inset-0 bg-brand-accent/5 rounded-full blur-2xl" />
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={iconIndex}
-                    initial={{ scale: 0.5, opacity: 0, rotate: -20 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                    exit={{ scale: 1.5, opacity: 0, rotate: 20 }}
-                    transition={{ type: "spring", damping: 15 }}
-                    className="relative z-10 bg-brand-white/5 p-8 rounded-[2.5rem] border border-brand-white/10 backdrop-blur-sm"
-                  >
-                    <CurrentIcon size={48} className="text-brand-accent" />
-                  </motion.div>
-                </AnimatePresence>
-              </motion.div>
             </div>
 
             {/* Poetic Branding */}
-            <div className="text-center space-y-6">
+            <div className="text-center space-y-4">
               <div className="overflow-hidden">
                 <motion.h1 
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-6xl md:text-7xl font-display font-black uppercase tracking-tighter text-brand-white leading-[0.8]"
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-5xl font-display font-medium uppercase tracking-widest text-[#E8DCC4] leading-tight"
                 >
-                  Wild<br />Goat
+                  Wild Goat
                 </motion.h1>
               </div>
               
-              <div className="h-4 flex items-center justify-center">
+              <div className="h-4">
                 <AnimatePresence mode="wait">
                   <motion.p 
                     key={msgIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-accent/60 italic"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-[9px] font-black uppercase tracking-[0.6em] text-brand-accent/40 italic"
                   >
                     {LOADING_MESSAGES[msgIndex]}
                   </motion.p>
                 </AnimatePresence>
               </div>
             </div>
-
-            {/* Stylized Progress (Non-Numeric) */}
-            <div className="w-24 h-1 bg-brand-white/5 rounded-full overflow-hidden relative">
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-accent to-transparent"
-                animate={{ 
-                  x: ["-100%", "100%"]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  ease: "easeInOut"
-                }}
-              />
-            </div>
           </div>
 
-          {/* Location Marks */}
-          <div className="absolute top-12 left-12 md:top-16 md:left-16 flex items-center gap-4">
-             <div className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse" />
-             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/20">Setting the table</span>
-          </div>
-
-          <div className="absolute bottom-12 right-12 md:bottom-16 md:right-16 text-right">
-             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/10 italic">Slow living • Fresh brewing</span>
+          {/* Aesthetic Footer */}
+          <div className="absolute bottom-16 left-0 right-0 flex flex-col items-center gap-6">
+             <div className="h-12 w-px bg-gradient-to-b from-brand-white/20 to-transparent" />
+             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/10">Slow Living in Hyderabad</span>
           </div>
         </motion.div>
       )}
     </AnimatePresence>
+
   );
 }
 

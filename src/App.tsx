@@ -4,6 +4,7 @@
  */
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { motion } from "motion/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AboutSection from "./components/AboutSection";
@@ -20,7 +21,11 @@ import { useEffect, useState } from "react";
 
 function HomePage() {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
       <Navbar />
       <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       <main>
@@ -37,7 +42,7 @@ function HomePage() {
       </main>
       <Footer />
       <AIAssistant />
-    </>
+    </motion.div>
   );
 }
 
