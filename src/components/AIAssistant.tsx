@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send, Command } from "lucide-react";
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import { MENU_CATEGORIES } from "../constants";
 
 const SUGGESTIONS = [
@@ -47,10 +47,10 @@ export default function AIAssistant() {
     setLoading(true);
 
     try {
-      const apiKey = process.env.GEMINI_API_KEY;
+      const apiKey = process.env.GROQ_API_KEY;
       if (!apiKey) throw new Error("API Key missing");
 
-      const ai = new GoogleGenAI({ apiKey });
+      const groq = new Groq({ apiKey, dangerouslyAllowBrowser: true });
       
       const menuContext = JSON.stringify(MENU_CATEGORIES);
       const systemInstruction = `
@@ -72,15 +72,19 @@ export default function AIAssistant() {
         Example: "I recommend the Wild Cortado. [Explore Specialty Coffee](#specialty-coffee)"
       `;
 
-      const result = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: val,
-        config: {
-          systemInstruction
-        }
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [
+          { role: "system", content: systemInstruction },
+          { role: "user", content: val }
+        ],
+        model: "openai/gpt-oss-120b",
+        temperature: 1,
+        max_completion_tokens: 8192,
+        top_p: 1,
+        stop: null
       });
-      
-      let text = result.text;
+
+      let text = chatCompletion.choices[0]?.message?.content || "";
       
       if (!text) throw new Error("Empty response");
 
@@ -99,20 +103,12 @@ export default function AIAssistant() {
 
       setMessages(prev => [...prev, { role: 'assistant', content: text }]);
     } catch (error: any) {
-      console.error("Gemini API Error details:", error);
+      console.error("Groq API Error details:", error);
       let errorMsg = "The connection to the archive is unstable. Please try again soon.";
       
-      const errorStr = typeof error === 'object' ? JSON.stringify(error) : String(error);
-
-      if (errorStr.includes("Requested entity was not found") || error?.status === "NOT_FOUND" || error?.code === 404) {
-        errorMsg = "The Scout requires a specialized archive access. Please select your API key and try again.";
-        // Trigger the AI Studio key selection dialog if it exists in the window
-        if ((window as any).aistudio?.openSelectKey) {
-            (window as any).aistudio.openSelectKey();
-        }
-      } else if (error?.message?.includes("API_KEY_INVALID")) {
-        errorMsg = "API key configuration issue. Contact the steward.";
-      } else if (error?.message?.includes("QUOTA_EXCEEDED")) {
+      if (error?.status === 401) {
+        errorMsg = "Archive access denied. Check your API key.";
+      } else if (error?.status === 429) {
         errorMsg = "The scout is overworked. Rest for a moment.";
       }
       
