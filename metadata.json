@@ -1,0 +1,13 @@
+{
+  "name": "Wild Goat - Resto Cafe",
+  "description": "A stunning, minimalist website for Wild Goat, a premier resto-cafe in Hyderabad featuring a curated menu, modern aesthetics, and a vibrant atmosphere.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "Responsive Design",
+    "Animated Transitions",
+    "Menu Showcase",
+    "Location Integration"
+  ]
+}
