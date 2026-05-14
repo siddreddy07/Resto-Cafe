@@ -58,6 +58,7 @@ export default function AIAssistant() {
         Recommend something to eat or drink based on this context. Be stylish, minimalist, and concise.
         Focus on the vibe of the resto-cafe: global cuisine, specialty coffee, and raw design.
         Menu Categories provided as context: ${menuContext}
+        Today's Date & Time is ${new Date().toISOString()}.
         
         RESERVATIONS:
         If a user mentions wanting to book or reserve a table:
