@@ -18,19 +18,16 @@ export default function FullMenu() {
       <div className="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-white/5 blur-[100px] rounded-full z-0 pointer-events-none" />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-10 py-6 md:py-8 flex justify-between items-center bg-gradient-to-b from-brand-black/80 to-transparent backdrop-blur-sm">
-        <Link to="/" className="group flex items-center gap-2 md:gap-3">
-          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-brand-white/10 flex items-center justify-center group-hover:bg-brand-white group-hover:text-brand-black transition-all">
-            <ArrowLeft size={16} />
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 md:py-8 flex justify-between items-center bg-gradient-to-b from-brand-black/90 to-transparent backdrop-blur-md border-b border-brand-white/5">
+        <Link to="/" className="group flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full border border-brand-white/10 flex items-center justify-center group-hover:bg-brand-white group-hover:text-brand-black transition-all">
+            <ArrowLeft size={18} />
           </div>
-          <span className="text-[9px] font-black uppercase tracking-[0.3em] opacity-40 group-hover:opacity-100 transition-opacity hidden sm:block">Back</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/40 group-hover:text-brand-white transition-all hidden sm:block">Explore Tribe</span>
         </Link>
-        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
-          <h1 className="text-lg md:text-xl font-display font-black uppercase tracking-widest text-[#E8DCC4]">Menu Selection</h1>
-        </div>
-        <div className="flex items-center gap-3 md:gap-4">
-           <div className="w-6 md:w-8 h-px bg-brand-white/10 hidden sm:block" />
-           <span className="text-[9px] font-black uppercase tracking-[0.3em] text-brand-accent/60 italic">S/S 24</span>
+        <div className="flex items-center gap-4">
+           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-accent italic">Spring Collection / ‘24</span>
+           <div className="w-8 h-px bg-brand-white/20 hidden md:block" />
         </div>
       </nav>
 
@@ -88,7 +85,7 @@ export default function FullMenu() {
         </motion.div>
 
         {/* Menu Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-10 md:gap-y-20">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 md:gap-x-12 gap-y-8 md:gap-y-20">
           <AnimatePresence mode="wait">
             {currentCategory?.items.map((item, idx) => (
               <motion.div

@@ -63,7 +63,7 @@ export default function Hero() {
       {/* Side HUD Elements */}
       <div className="absolute top-1/2 -translate-y-1/2 left-12 hidden lg:flex flex-col gap-24 items-center">
         <div className="w-px h-32 bg-brand-white/10" />
-        <span className="rotate-90 text-[10px] font-black text-brand-white/20 tracking-[0.5em] uppercase whitespace-nowrap">EST. MMXXIV</span>
+        <span className="rotate-90 text-[10px] font-black text-brand-white/20 tracking-[0.5em] uppercase whitespace-nowrap">EST. MMXXIII</span>
       </div>
 
       <div className="absolute bottom-12 left-12 flex items-end gap-4 overflow-hidden">

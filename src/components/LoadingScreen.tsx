@@ -127,16 +127,17 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
             </div>
 
             {/* Poetic Branding */}
-            <div className="text-center space-y-4">
+            <div className="text-center space-y-6">
               <div className="overflow-hidden">
-                <motion.h1 
+                <motion.div 
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl font-display font-medium uppercase tracking-widest text-[#E8DCC4] leading-tight"
+                  className="flex flex-col items-center leading-[0.6] font-display font-black uppercase tracking-[-0.1em] text-[#FFFFFF]"
                 >
-                  Wild Goat
-                </motion.h1>
+                  <span className="text-6xl md:text-7xl">WILD</span>
+                  <span className="text-6xl md:text-7xl">GOAT</span>
+                </motion.div>
               </div>
               
               <div className="h-4">

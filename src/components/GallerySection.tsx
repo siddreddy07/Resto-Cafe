@@ -92,29 +92,35 @@ export default function GallerySection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] flex items-center justify-center bg-brand-black/95 backdrop-blur-2xl p-6 md:p-20"
+            className="fixed inset-0 z-[1000] flex items-center justify-center bg-brand-black/98 backdrop-blur-3xl p-4 md:p-20"
           >
             <button 
               onClick={() => setSelectedImage(null)}
-              className="absolute top-6 right-6 md:top-10 md:right-10 z-[1010] p-4 bg-brand-white/10 rounded-full hover:bg-brand-white hover:text-brand-black transition-all"
+              className="absolute top-6 right-6 md:top-12 md:right-12 z-[1010] w-12 h-12 md:w-20 md:h-20 bg-brand-white text-brand-black rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-2xl"
             >
-              <X size={24} className="md:size-32" />
+              <X size={20} className="md:w-8 md:h-8" />
             </button>
             
             <motion.div
               layoutId={selectedImage}
-              initial={{ scale: 0.9, y: 50, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.9, y: 50, opacity: 0 }}
-              className="relative w-full h-full max-w-7xl max-h-[80vh] rounded-[3rem] overflow-hidden shadow-2xl"
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-6xl max-h-[70vh] md:max-h-[85vh] aspect-[4/5] md:aspect-video rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.8)] border border-brand-white/10"
             >
               <img 
                 src={selectedImage.split('|')[0]} 
                 alt="Fullscreen View" 
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-8 left-8">
-                 <span className="text-[10px] font-black tracking-[0.5em] text-brand-white/40 uppercase">High Definition Archive</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12">
+                 <div className="flex items-center gap-3 mb-2 opacity-60">
+                    <div className="w-6 h-px bg-brand-accent" />
+                    <span className="text-[8px] md:text-[10px] font-black tracking-[0.5em] text-brand-white uppercase">Visual Archive</span>
+                 </div>
+                 <h3 className="text-3xl md:text-5xl font-display font-black uppercase tracking-tighter text-brand-white">HYD_SEC_0{selectedImage.split('|')[1]}</h3>
               </div>
             </motion.div>
           </motion.div>

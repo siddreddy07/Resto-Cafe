@@ -220,7 +220,7 @@ export default function ReservationSection() {
               <div className="pt-10 md:pt-16 flex justify-between items-center opacity-20 hover:opacity-100 transition-opacity">
                  <p className="text-[8px] md:text-[10px] font-black tracking-widest text-brand-white uppercase italic">Wild Goat / Jubilee Hills</p>
                  <div className="h-[1px] flex-grow mx-4 md:mx-8 bg-brand-white/20" />
-                 <p className="text-[8px] md:text-[10px] font-mono text-brand-white uppercase">©2024</p>
+                 <p className="text-[8px] md:text-[10px] font-mono text-brand-white uppercase">©2026</p>
               </div>
             </div>
           )}

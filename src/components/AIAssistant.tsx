@@ -161,18 +161,18 @@ export default function AIAssistant() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-[70] h-16 pl-6 pr-8 bg-brand-black text-brand-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex items-center gap-4 group border border-brand-white/10 overflow-hidden"
+        className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-[70] h-14 w-14 sm:h-16 sm:w-auto sm:pl-6 sm:pr-8 bg-brand-black text-brand-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex items-center justify-center sm:justify-start gap-4 group border border-brand-white/10 overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-white/5 to-transparent -translate-x-full group-hover:animate-shimmer" />
-        <div className="relative w-10 h-10 bg-brand-white rounded-full flex items-center justify-center transition-transform group-hover:rotate-12 group-hover:scale-110">
-          <Sparkles size={20} className="text-brand-black" />
+        <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-brand-white rounded-full flex items-center justify-center shrink-0 transition-transform group-hover:rotate-12 group-hover:scale-110">
+          <Sparkles size={16} className="text-brand-black sm:w-5 sm:h-5" />
           <div className="absolute -inset-1 bg-brand-accent/20 rounded-full blur-md animate-pulse" />
         </div>
-        <div className="flex flex-col items-start leading-none shrink-0 hidden md:flex">
-          <span className="text-[8px] font-black uppercase tracking-[0.3em] text-brand-accent mb-1 group-hover:translate-x-1 transition-transform">Live Archive</span>
-          <span className="text-[11px] font-black uppercase tracking-[0.2em] text-brand-white">Consult Scout</span>
+        <div className="flex flex-col items-start leading-none shrink-0 hidden sm:flex">
+          <span className="text-[7px] sm:text-[8px] font-black uppercase tracking-[0.3em] text-brand-accent mb-0.5 sm:mb-1 group-hover:translate-x-1 transition-transform">Live Archive</span>
+          <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-brand-white">Consult Scout</span>
         </div>
-        <div className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping hidden md:block" />
+        <div className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping hidden sm:block" />
       </motion.button>
 
       <AnimatePresence>
@@ -181,7 +181,7 @@ export default function AIAssistant() {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            className="fixed bottom-24 right-8 z-[70] w-[350px] md:w-[400px] bg-brand-black/95 backdrop-blur-3xl border border-brand-white/10 rounded-3xl overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,1)] flex flex-col h-auto max-h-[80vh]"
+            className="fixed bottom-24 right-4 sm:right-8 z-[70] w-[calc(100vw-32px)] sm:w-[400px] bg-brand-black/95 backdrop-blur-3xl border border-brand-white/10 rounded-3xl overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,1)] flex flex-col h-auto max-h-[75vh] md:max-h-[80vh]"
           >
             <div className="p-6 border-b border-brand-white/10 flex justify-between items-center bg-brand-black/40 shrink-0">
               <div className="flex items-center gap-3">
