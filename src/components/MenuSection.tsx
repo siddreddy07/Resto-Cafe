@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 import { MENU_CATEGORIES } from "../constants";
 
 export default function MenuSection() {
@@ -137,9 +139,22 @@ export default function MenuSection() {
         </motion.div>
       </div>
 
-      <div className="mt-24 text-center">
-        <p className="text-xs text-brand-white/30 uppercase tracking-[0.2em]">
-          Prices are exclusive of taxes. All our ingredients are locally sourced.
+      <div className="mt-24 flex flex-col items-center gap-8">
+        <motion.div
+           whileHover={{ scale: 1.05 }}
+           className="relative group"
+        >
+          <Link 
+            to="/menu" 
+            className="flex items-center gap-4 px-12 py-6 bg-brand-white text-brand-black rounded-full text-[10px] font-black uppercase tracking-[0.4em] transition-all hover:bg-brand-accent shadow-[0_20px_50px_rgba(255,255,255,0.1)] group-hover:shadow-brand-accent/30"
+          >
+            Explore Interactive Menu
+            <ChevronRight size={16} className="group-hover:translate-x-2 transition-transform" />
+          </Link>
+        </motion.div>
+        
+        <p className="text-[10px] text-brand-white/30 uppercase tracking-[0.2em] font-bold">
+          High-Definition Textures & Handcrafted Flavors
         </p>
       </div>
     </section>

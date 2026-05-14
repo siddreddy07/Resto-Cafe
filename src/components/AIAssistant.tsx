@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send, Command } from "lucide-react";
-import Groq from "groq-sdk";
+import { Groq } from "groq-sdk";
 import { MENU_CATEGORIES } from "../constants";
 
 const SUGGESTIONS = [
@@ -48,7 +48,7 @@ export default function AIAssistant() {
 
     try {
       const apiKey = process.env.GROQ_API_KEY;
-      if (!apiKey) throw new Error("API Key missing");
+      if (!apiKey) throw new Error("GROQ API Key missing");
 
       const groq = new Groq({ apiKey, dangerouslyAllowBrowser: true });
       
@@ -58,7 +58,6 @@ export default function AIAssistant() {
         Recommend something to eat or drink based on this context. Be stylish, minimalist, and concise.
         Focus on the vibe of the resto-cafe: global cuisine, specialty coffee, and raw design.
         Menu Categories provided as context: ${menuContext}
-        Today's Date & Time is ${new Date().toISOString()}.
         
         RESERVATIONS:
         If a user mentions wanting to book or reserve a table:
@@ -76,18 +75,17 @@ export default function AIAssistant() {
       const chatCompletion = await groq.chat.completions.create({
         messages: [
           { role: "system", content: systemInstruction },
+          ...messages.map(m => ({ role: m.role, content: m.content })),
           { role: "user", content: val }
         ],
         model: "llama-3.3-70b-versatile",
-        temperature: 1,
-        max_completion_tokens: 8192,
-        top_p: 1,
-        stop: null
+        temperature: 0.7,
+        max_tokens: 500,
       });
-
+      
       let text = chatCompletion.choices[0]?.message?.content || "";
       
-      if (!text) throw new Error("Empty response");
+      if (!text) throw new Error("Empty response from Groq");
 
       // Handle Reservation Event
       const reservationMatch = text.match(/\[\[RESERVATION:(\{.*?\})\]\]/);
@@ -108,7 +106,7 @@ export default function AIAssistant() {
       let errorMsg = "The connection to the archive is unstable. Please try again soon.";
       
       if (error?.status === 401) {
-        errorMsg = "Archive access denied. Check your API key.";
+        errorMsg = "API key configuration issue. Contact the steward.";
       } else if (error?.status === 429) {
         errorMsg = "The scout is overworked. Rest for a moment.";
       }

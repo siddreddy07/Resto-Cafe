@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AboutSection from "./components/AboutSection";
@@ -13,29 +14,13 @@ import LocationSection from "./components/LocationSection";
 import Footer from "./components/Footer";
 import AIAssistant from "./components/AIAssistant";
 import CustomCursor from "./components/CustomCursor";
-import { useEffect } from "react";
+import LoadingScreen from "./components/LoadingScreen";
+import FullMenu from "./pages/FullMenu";
+import { useEffect, useState } from "react";
 
-export default function App() {
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest("a");
-      if (anchor && anchor.hash && anchor.origin === window.location.origin) {
-        e.preventDefault();
-        const element = document.querySelector(anchor.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    document.addEventListener("click", handleAnchorClick);
-    return () => document.removeEventListener("click", handleAnchorClick);
-  }, []);
-
+function HomePage() {
   return (
-    <div className="relative overflow-x-hidden selection:bg-brand-white selection:text-brand-black">
-      <CustomCursor />
+    <>
       <Navbar />
       <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       <main>
@@ -52,7 +37,51 @@ export default function App() {
       </main>
       <Footer />
       <AIAssistant />
-    </div>
+    </>
+  );
+}
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (anchor && anchor.hash && anchor.origin === window.location.origin) {
+        if (anchor.hash.startsWith("#")) {
+          // If we are on home page, scroll
+          if (window.location.pathname === "/") {
+            e.preventDefault();
+            const element = document.querySelector(anchor.hash);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        }
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+    return () => document.removeEventListener("click", handleAnchorClick);
+  }, []);
+
+  return (
+    <Router>
+      <div className="relative overflow-x-hidden selection:bg-brand-white selection:text-brand-black">
+        <LoadingScreen onComplete={() => setIsLoading(false)} />
+        
+        {!isLoading && (
+          <>
+            <CustomCursor />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/menu" element={<FullMenu />} />
+            </Routes>
+          </>
+        )}
+      </div>
+    </Router>
   );
 }
 

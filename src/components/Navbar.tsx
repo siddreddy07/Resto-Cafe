@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { Menu, X, Instagram, MapPin } from "lucide-react";
+import { Menu, X, Instagram, MapPin, Wine } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { CAFE_INFO } from "../constants";
 
 export default function Navbar() {
@@ -36,7 +37,11 @@ export default function Navbar() {
             WILD GOAT
           </a>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium uppercase tracking-widest text-brand-white/70">
-            <a href="#menu" className="hover:text-brand-white transition-colors">Menu</a>
+            <Link to="/" className="hover:text-brand-white transition-colors">Home</Link>
+            <Link to="/menu" className="hover:text-brand-white transition-colors flex items-center gap-2">
+              <Wine size={14} className="text-brand-accent" />
+              Menu
+            </Link>
             <a href="#about" className="hover:text-brand-white transition-colors">About</a>
             <a href="#location" className="hover:text-brand-white transition-colors">Location</a>
           </div>
@@ -76,12 +81,19 @@ export default function Navbar() {
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         className="fixed inset-0 z-40 bg-brand-black flex flex-col items-center justify-center gap-8 md:hidden"
       >
+        <Link
+          to="/menu"
+          onClick={() => setIsOpen(false)}
+          className="text-4xl font-display font-bold tracking-tighter text-brand-accent hover:text-brand-white transition-colors"
+        >
+          MENU
+        </Link>
         <a
-          href="#menu"
+          href="/"
           onClick={() => setIsOpen(false)}
           className="text-4xl font-display font-bold tracking-tighter hover:text-brand-stone transition-colors"
         >
-          MENU
+          HOME
         </a>
         <a
           href="#about"
