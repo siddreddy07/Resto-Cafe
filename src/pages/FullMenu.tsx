@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Coffee, ArrowLeft, ArrowRight, Utensils, Sparkles, ChevronRight, Info, Eye } from "lucide-react";
+import { Coffee, ArrowLeft, ArrowRight, Utensils, Sparkles, ChevronRight, Info, Eye, X } from "lucide-react";
 import { MENU_CATEGORIES } from "../constants";
 
 export default function FullMenu() {
@@ -18,20 +18,19 @@ export default function FullMenu() {
       <div className="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-white/5 blur-[100px] rounded-full z-0 pointer-events-none" />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-between items-center mix-blend-difference">
-        <Link to="/" className="group flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full border border-brand-white/20 flex items-center justify-center group-hover:bg-brand-white group-hover:text-brand-black transition-all">
-            <ArrowLeft size={18} />
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-10 py-6 md:py-8 flex justify-between items-center bg-gradient-to-b from-brand-black/80 to-transparent backdrop-blur-sm">
+        <Link to="/" className="group flex items-center gap-2 md:gap-3">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-brand-white/10 flex items-center justify-center group-hover:bg-brand-white group-hover:text-brand-black transition-all">
+            <ArrowLeft size={16} />
           </div>
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 transition-opacity">Back to Tribe</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.3em] opacity-40 group-hover:opacity-100 transition-opacity hidden sm:block">Back</span>
         </Link>
-        <div className="flex flex-col items-center">
-          <h1 className="text-xl font-display font-black uppercase tracking-tighter mix-blend-difference">Wild Goat Menu</h1>
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <h1 className="text-lg md:text-xl font-display font-black uppercase tracking-widest text-[#E8DCC4]">Menu Selection</h1>
         </div>
-        <div className="flex items-center gap-4">
-           {/* Decorative */}
-           <div className="w-8 h-px bg-brand-white/20 hidden md:block" />
-           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-accent italic">Spring / Summer ‘24</span>
+        <div className="flex items-center gap-3 md:gap-4">
+           <div className="w-6 md:w-8 h-px bg-brand-white/10 hidden sm:block" />
+           <span className="text-[9px] font-black uppercase tracking-[0.3em] text-brand-accent/60 italic">S/S 24</span>
         </div>
       </nav>
 
@@ -55,15 +54,15 @@ export default function FullMenu() {
       </aside>
 
       {/* Main Content Area */}
-      <main className="pt-32 pb-40 px-6 lg:pl-64 lg:pr-20 max-w-7xl mx-auto relative z-10">
+      <main className="pt-28 md:pt-40 pb-32 md:pb-40 px-4 md:px-8 lg:pl-64 lg:pr-12 max-w-7xl mx-auto relative z-10">
         
         {/* Mobile Category Scroll */}
-        <div className="lg:hidden flex overflow-x-auto gap-4 mb-12 pb-4 no-scrollbar">
+        <div className="lg:hidden flex overflow-x-auto gap-3 mb-10 pb-4 no-scrollbar -mx-4 px-4">
           {MENU_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`whitespace-nowrap px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all ${activeCategory === cat.id ? 'bg-brand-white text-brand-black border-brand-white' : 'border-brand-white/10 text-brand-white/40'}`}
+              className={`whitespace-nowrap px-5 py-2.5 rounded-2xl text-[9px] font-black uppercase tracking-widest border transition-all ${activeCategory === cat.id ? 'bg-brand-accent text-brand-black border-brand-accent shadow-[0_10px_20px_rgba(255,255,0,0.1)]' : 'border-brand-white/5 text-brand-white/30'}`}
             >
               {cat.name}
             </button>
@@ -73,23 +72,23 @@ export default function FullMenu() {
         {/* Category Header */}
         <motion.div
           key={activeCategory}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="mb-16 md:mb-24"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-12 md:mb-20 px-2"
         >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-[1px] bg-brand-accent" />
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-accent">Explore Selection</span>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-[1px] bg-brand-accent/40" />
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-brand-accent/60">House Specialties</span>
           </div>
-          <h2 className="text-6xl md:text-8xl font-display font-black uppercase tracking-tighter leading-none mb-8">
+          <h2 className="text-4xl md:text-7xl lg:text-8xl font-display font-black uppercase tracking-tighter leading-none">
             {currentCategory?.name.split(' ').map((word, i) => (
-              <span key={i} className={i % 2 !== 0 ? "text-transparent stroke-text" : ""}>{word} </span>
+              <span key={i} className={i % 2 !== 0 ? "text-transparent stroke-text" : "text-[#F5F5F5]"}>{word} </span>
             ))}
           </h2>
         </motion.div>
 
         {/* Menu Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-20">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-10 md:gap-y-20">
           <AnimatePresence mode="wait">
             {currentCategory?.items.map((item, idx) => (
               <motion.div
@@ -97,38 +96,39 @@ export default function FullMenu() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
-                transition={{ delay: idx * 0.1 }}
-                className="group relative"
+                transition={{ delay: idx * 0.05 }}
+                className="group relative flex flex-col"
               >
-                {/* Image Reveal on PC / Main display for Mobile */}
+                {/* Optimized Image Card */}
                 <div 
                   onClick={() => setSelectedItem(item)}
-                  className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-brand-white/5 border border-brand-white/10 mb-6 cursor-pointer"
+                  className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] bg-brand-white/5 border border-brand-white/5 mb-4 md:mb-6 cursor-pointer group-hover:rounded-2xl transition-all duration-700"
                 >
                   <img 
                     src={item.image} 
                     alt={item.name} 
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+                    className="w-full h-full object-cover opacity-80 md:opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-brand-black/20 to-transparent transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent transition-opacity duration-500" />
                   
                   {/* Hover Info Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px]">
-                    <div className="w-16 h-16 rounded-full bg-brand-accent text-brand-black flex items-center justify-center shadow-[0_0_30px_rgba(255,255,0,0.4)] scale-75 group-hover:scale-100 transition-transform">
-                      <Eye size={24} />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] hidden md:flex">
+                    <div className="w-14 h-14 rounded-full bg-brand-accent text-brand-black flex items-center justify-center shadow-[0_0_30px_rgba(255,255,0,0.4)] scale-75 group-hover:scale-100 transition-transform">
+                      <Eye size={20} />
                     </div>
                   </div>
                   
-                  <div className="absolute bottom-6 left-6">
-                    <span className="text-[40px] font-display font-black text-brand-white">₹{item.price}</span>
+                  <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex flex-col">
+                    <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-brand-white/40 mb-0.5 md:mb-1">Curation</span>
+                    <span className="text-xl md:text-3xl font-display font-black text-brand-white">₹{item.price}</span>
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-1.5 md:space-y-3 px-1 md:px-2">
                   <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-black uppercase tracking-tight group-hover:text-brand-accent transition-colors">{item.name}</h3>
+                    <h3 className="text-sm md:text-2xl font-black uppercase tracking-tight group-hover:text-brand-accent transition-colors line-clamp-1">{item.name}</h3>
                   </div>
-                  <p className="text-xs text-brand-white/40 leading-relaxed max-w-[90%] font-medium uppercase tracking-wider">{item.description}</p>
+                  <p className="text-[9px] md:text-[11px] text-brand-white/30 md:text-brand-white/40 leading-relax max-w-[95%] font-medium uppercase tracking-widest leading-relaxed line-clamp-2">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -141,65 +141,100 @@ export default function FullMenu() {
         {selectedItem && (
           <motion.div 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-brand-black/90 backdrop-blur-3xl"
+            animate={{ opacity: 1, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }}
+            exit={{ opacity: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-12 bg-brand-black/95 backdrop-blur-2xl"
           >
             <motion.div 
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="relative bg-[#111] border border-brand-white/10 rounded-[3rem] overflow-hidden w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
+              initial={{ scale: 0.92, opacity: 0, y: 40, filter: "blur(10px)" }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1, 
+                y: 0, 
+                filter: "blur(0px)",
+                transition: { 
+                  duration: 0.8, 
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.1 
+                } 
+              }}
+              exit={{ 
+                scale: 0.95, 
+                opacity: 0, 
+                y: 30, 
+                filter: "blur(10px)",
+                transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+              }}
+              className="relative bg-[#0F0F0F] border border-brand-white/5 md:border-brand-white/10 rounded-[1.5rem] md:rounded-[4rem] overflow-hidden w-full max-w-[90vw] sm:max-w-xl md:max-w-4xl max-h-[85vh] flex flex-col md:flex-row shadow-[0_40px_120px_rgba(0,0,0,0.6)]"
             >
               <button 
                 onClick={() => setSelectedItem(null)}
-                className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-brand-white text-brand-black flex items-center justify-center border border-brand-black/10 hover:scale-110 transition-transform"
+                className="absolute top-3 right-3 md:top-8 md:right-8 z-30 w-9 h-9 md:w-14 md:h-14 rounded-full bg-brand-white text-brand-black flex items-center justify-center border border-brand-black/10 hover:scale-110 active:scale-95 transition-all shadow-xl"
               >
-                <ChevronRight size={24} className="rotate-45 md:rotate-0" />
+                <X size={18} className="md:w-6 md:h-6" />
               </button>
 
-              <div className="w-full md:w-1/2 aspect-video md:aspect-square overflow-hidden shrink-0">
+              <motion.div 
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }}
+                className="w-full md:w-[45%] h-48 sm:h-64 md:h-auto overflow-hidden shrink-0 relative"
+              >
                 <img src={selectedItem.image} alt={selectedItem.name} className="w-full h-full object-cover" />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-brand-black/80 to-transparent" />
+              </motion.div>
 
-              <div className="flex-grow p-10 md:p-14 flex flex-col justify-between overflow-y-auto">
-                <div className="space-y-8">
-                  <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Sparkles size={14} className="text-brand-accent" />
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-accent">Exquisite Quality</span>
+              <div className="flex-grow p-6 md:p-14 lg:p-16 flex flex-col justify-between overflow-y-auto">
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0, transition: { delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
+                  className="space-y-4 md:space-y-10"
+                >
+                  <div className="space-y-2 md:space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 md:w-8 h-px bg-brand-accent/40" />
+                      <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em] text-brand-accent">Information</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-display font-black uppercase tracking-tighter text-brand-white mb-4">{selectedItem.name}</h2>
-                    <p className="text-sm text-brand-white/50 leading-relaxed max-w-md font-medium">{selectedItem.description}</p>
+                    <h2 className="text-2xl sm:text-4xl lg:text-6xl font-display font-black uppercase tracking-tighter text-brand-white leading-tight md:leading-[0.9]">{selectedItem.name}</h2>
+                    <p className="text-[11px] md:text-base text-brand-white/40 leading-relaxed max-w-md font-medium tracking-wide">{selectedItem.description}</p>
                   </div>
 
-                  <div className="flex flex-wrap gap-4">
-                    <div className="px-4 py-2 bg-brand-white/5 border border-brand-white/10 rounded-xl flex items-center gap-3">
-                      <Coffee size={16} className="text-brand-accent/60" />
-                      <span className="text-[10px] font-black uppercase tracking-widest">Handcrafted</span>
-                    </div>
-                    <div className="px-4 py-2 bg-brand-white/5 border border-brand-white/10 rounded-xl flex items-center gap-3">
-                      <Utensils size={16} className="text-brand-accent/60" />
-                      <span className="text-[10px] font-black uppercase tracking-widest">Global Sourcing</span>
-                    </div>
+                  <div className="flex flex-wrap gap-2 md:gap-3">
+                    {[
+                      { icon: Coffee, text: "Handcrafted" },
+                      { icon: Utensils, text: "A-Grade" }
+                    ].map((badge, bIdx) => (
+                      <div key={bIdx} className="px-3 py-1.5 md:px-5 md:py-3 bg-brand-white/5 border border-brand-white/5 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3">
+                        <badge.icon size={10} className="md:w-[14px] md:h-[14px] text-brand-accent/60" />
+                        <span className="text-[7px] md:text-[10px] font-black uppercase tracking-widest">{badge.text}</span>
+                      </div>
+                    ))}
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="mt-12 flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/30 mb-2">Price Value</span>
-                    <span className="text-5xl font-display font-black text-brand-white tracking-widest">₹{selectedItem.price}</span>
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0, transition: { delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
+                  className="mt-8 md:mt-14 pt-6 md:pt-10 border-t border-brand-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 md:gap-8"
+                >
+                  <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/20 mb-1 md:mb-2">Heritage Selection</span>
+                    <span className="text-3xl md:text-6xl font-display font-black text-brand-white tracking-widest leading-none">₹{selectedItem.price}</span>
                   </div>
                   <button 
                     onClick={() => {
                         setSelectedItem(null);
-                        window.location.hash = "#reservations";
+                        const resSection = document.getElementById('reservations');
+                        if (resSection) {
+                          resSection.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          window.location.hash = "#reservations";
+                        }
                     }}
-                    className="px-10 py-5 bg-brand-accent text-brand-black rounded-full text-[11px] font-black uppercase tracking-widest hover:scale-105 transition-transform"
+                    className="w-full sm:w-auto px-10 py-5 md:px-12 md:py-6 bg-brand-accent text-brand-black rounded-full text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] hover:bg-brand-white transition-all shadow-xl"
                   >
                     Reserve Table
                   </button>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>

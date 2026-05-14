@@ -30,47 +30,59 @@ export default function Navbar() {
     <>
       <motion.nav
         style={{ backgroundColor, backdropFilter: backdropBlur, borderBottom }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 lg:px-20 h-20"
       >
-        <div className="flex items-center gap-8">
-          <a href="#" className="text-2xl font-display font-bold tracking-tighter text-brand-white">
+        <div className="flex items-center gap-12 lg:gap-16">
+          <Link to="/" className="text-xl md:text-2xl font-display font-black tracking-widest text-[#E8DCC4] hover:text-brand-accent transition-colors">
             WILD GOAT
-          </a>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium uppercase tracking-widest text-brand-white/70">
-            <Link to="/" className="hover:text-brand-white transition-colors">Home</Link>
-            <Link to="/menu" className="hover:text-brand-white transition-colors flex items-center gap-2">
-              <Wine size={14} className="text-brand-accent" />
+          </Link>
+          <div className="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.3em] text-brand-white/40">
+            <Link to="/" className="hover:text-brand-white hover:tracking-[0.4em] transition-all">Home</Link>
+            <Link to="/menu" className="hover:text-brand-white hover:tracking-[0.4em] transition-all flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-brand-accent rounded-full" />
               Menu
             </Link>
-            <a href="#about" className="hover:text-brand-white transition-colors">About</a>
-            <a href="#location" className="hover:text-brand-white transition-colors">Location</a>
+            <a href="#about" className="hover:text-brand-white hover:tracking-[0.4em] transition-all">Heritage</a>
+            <a href="#location" className="hover:text-brand-white hover:tracking-[0.4em] transition-all">Tribe</a>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <a
-            href={CAFE_INFO.googleMapsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest text-brand-white/50 hover:text-brand-white transition-colors"
-          >
-            <MapPin size={14} />
-            Jubilee Hills
-          </a>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-brand-white hover:bg-brand-white/10 rounded-full transition-colors md:hidden"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-          <a
-            href={`https://instagram.com/${CAFE_INFO.instagram}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex p-2 text-brand-white hover:bg-brand-white/10 rounded-full transition-colors"
-          >
-            <Instagram size={20} />
-          </a>
+        <div className="flex items-center gap-6 md:gap-8">
+          <div className="hidden md:flex flex-col items-end">
+             <span className="text-[8px] font-black uppercase tracking-[0.4em] text-brand-white/20 mb-0.5">Location</span>
+             <a
+               href={CAFE_INFO.googleMapsLink}
+               target="_blank"
+               rel="noopener noreferrer"
+               className="text-[10px] font-black uppercase tracking-widest text-brand-white/60 hover:text-brand-accent transition-colors flex items-center gap-2"
+             >
+               Jubilee Hills
+               <MapPin size={12} className="text-brand-accent" />
+             </a>
+          </div>
+          
+          <div className="flex items-center gap-2 md:gap-4">
+            <a
+              href={`https://instagram.com/${CAFE_INFO.instagram}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 text-brand-white hover:bg-brand-white/5 rounded-full transition-all border border-transparent hover:border-brand-white/10"
+            >
+              <Instagram size={18} />
+            </a>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2.5 text-brand-white bg-brand-white/5 md:hidden rounded-full transition-colors border border-brand-white/10"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+            <Link 
+              to="/menu" 
+              className="hidden md:flex px-6 py-2.5 bg-brand-accent text-brand-black rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-white transition-all shadow-lg"
+            >
+              Explore Menu
+            </Link>
+          </div>
         </div>
       </motion.nav>
 
