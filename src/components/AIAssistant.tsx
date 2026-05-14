@@ -77,7 +77,7 @@ export default function AIAssistant() {
           { role: "system", content: systemInstruction },
           { role: "user", content: val }
         ],
-        model: "openai/gpt-oss-120b",
+        model: "llama-3.3-70b-versatile",
         temperature: 1,
         max_completion_tokens: 8192,
         top_p: 1,
