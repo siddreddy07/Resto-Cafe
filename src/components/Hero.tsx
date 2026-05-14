@@ -47,8 +47,8 @@ export default function Hero() {
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center leading-[0.5] font-display font-black tracking-[-0.11em] select-none text-brand-white mix-blend-difference uppercase"
           >
-            <span className="text-7xl sm:text-9xl md:text-[15vw] lg:text-[12vw] xl:text-[10vw]">WILD</span>
-            <span className="text-7xl sm:text-9xl md:text-[15vw] lg:text-[12vw] xl:text-[10vw]">GOAT</span>
+            <span className="text-7xl sm:text-9xl -mt-2 md:text-[10vw] lg:text-[10vw] xl:text-[10vw]">WILD</span>
+            <span className="text-7xl sm:text-9xl -mt-2 sm:-mt-2 md:-mt-6 xl:-mt-10 md:text-[10vw] lg:text-[10vw] xl:text-[10vw]">GOAT</span>
           </motion.div>
         </div>
 
