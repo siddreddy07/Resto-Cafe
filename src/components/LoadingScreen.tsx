@@ -95,7 +95,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
           <div className="relative z-[320] flex flex-col items-center">
             {/* The Brand Reveal */}
             <div className="flex flex-col items-center space-y-2">
-              <div className="overflow-hidden h-16 md:h-24">
+              <div className="overflow-hidden h-20 md:h-44 flex items-center">
                 <AnimatePresence>
                   {phase >= 1 && (
                     <motion.h1 
@@ -110,7 +110,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
                 </AnimatePresence>
               </div>
               
-              <div className="overflow-hidden h-16 md:h-24">
+              <div className="overflow-hidden h-20 md:h-44 flex items-center">
                 <AnimatePresence>
                   {phase >= 2 && (
                     <motion.h1 
@@ -127,7 +127,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
             </div>
 
             {/* Cursive Handwriting Effect */}
-            <div className="mt-12 h-12 flex items-center">
+            <div className="mt-12 h-16 md:h-24 flex items-center">
               <div className="flex">
                 {welcomeText.split("").map((char, i) => (
                   <motion.span

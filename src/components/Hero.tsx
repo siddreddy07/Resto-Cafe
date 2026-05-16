@@ -10,7 +10,7 @@ export default function Hero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen w-full bg-brand-black overflow-hidden flex flex-col justify-center">
+    <section ref={containerRef} className="relative min-h-screen w-full bg-brand-black overflow-hidden flex flex-col justify-center md:justify-start lg:justify-center md:pt-24 lg:pt-0">
       {/* Decorative Blur Backgrounds */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <motion.div 
@@ -26,7 +26,7 @@ export default function Hero() {
       </div>
 
       {/* Main Grid Content */}
-      <div className="relative z-10 w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 lg:py-32 flex flex-col md:flex-row items-center gap-12 md:gap-16">
+      <div className="relative z-10 w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-20 py-16 md:pt-8 md:pb-16 lg:py-32 flex flex-col md:flex-row items-center gap-12 md:gap-16">
         
         {/* Left: Branding & Core Message */}
         <div className="w-full md:w-1/2 flex flex-col justify-center">
