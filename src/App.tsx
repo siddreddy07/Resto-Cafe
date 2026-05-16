@@ -47,7 +47,7 @@ function HomePage() {
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(() => !sessionStorage.getItem('loadingShown'));
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -74,12 +74,9 @@ export default function App() {
   return (
     <Router>
       <div className="relative overflow-x-hidden selection:bg-brand-white selection:text-brand-black">
-        {isLoading ? (
-          <LoadingScreen onComplete={() => {
-            setIsLoading(false);
-            sessionStorage.setItem('loadingShown', 'true');
-          }} />
-        ) : (
+        <LoadingScreen onComplete={() => setIsLoading(false)} />
+        
+        {!isLoading && (
           <>
             <CustomCursor />
             <Routes>

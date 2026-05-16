@@ -85,7 +85,7 @@ export default function FullMenu() {
         </motion.div>
 
         {/* Menu Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 md:gap-x-12 gap-y-8 md:gap-y-20">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-12 gap-y-6 md:gap-y-20">
           <AnimatePresence mode="wait">
             {currentCategory?.items.map((item, idx) => (
               <motion.div
@@ -224,10 +224,10 @@ export default function FullMenu() {
                         if (resSection) {
                           resSection.scrollIntoView({ behavior: 'smooth' });
                         } else {
-                          window.location.hash = "#reservations";
+                           window.location.href = "/#reservations";
                         }
                     }}
-                    className="w-full sm:w-auto px-10 py-5 md:px-12 md:py-6 bg-brand-accent text-brand-black rounded-full text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] hover:bg-brand-white transition-all shadow-xl"
+                    className="w-full sm:w-auto px-8 py-4 md:px-12 md:py-6 bg-brand-accent text-brand-black rounded-full text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] hover:bg-brand-white transition-all shadow-xl"
                   >
                     Reserve Table
                   </button>

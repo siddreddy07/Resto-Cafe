@@ -5,71 +5,72 @@ import { CAFE_INFO } from "../constants";
 
 export default function LocationSection() {
   return (
-    <section id="location" className="section-padding bg-brand-black">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="text-xs font-bold tracking-[0.4em] uppercase text-brand-white/40 mb-4 block">
-            Visit Us
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black tracking-tighter mb-8 md:mb-12">
-            HYDERABAD <br className="hidden md:block" /> 400 036
-          </h2>
+    <section id="location" className="py-16 md:py-32 lg:py-48 bg-brand-black">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-brand-white/40 mb-3 md:mb-4 block">
+              Visit Us
+            </span>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-display font-black tracking-tighter mb-8 md:mb-12 leading-tight uppercase text-brand-white">
+              HYDERABAD <br className="hidden md:block" /> 400 036
+            </h2>
 
-          <div className="space-y-12">
-            <div className="flex gap-6">
-              <div className="p-3 bg-brand-white/5 rounded-lg h-fit text-brand-white">
-                <MapPin size={24} />
+            <div className="space-y-8 md:space-y-12">
+              <div className="flex gap-4 md:gap-6">
+                <div className="p-3 bg-brand-white/5 rounded-lg h-fit text-brand-white scale-90 md:scale-100">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-brand-white/40 mb-1">Location</p>
+                  <p className="text-base md:text-lg font-light text-brand-white/80 leading-relaxed max-w-xs">
+                    {CAFE_INFO.address}
+                  </p>
+                  <a
+                    href={CAFE_INFO.googleMapsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-white hover:underline group"
+                  >
+                    Get Directions <ArrowUpRight size={12} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </a>
+                </div>
               </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-brand-white/40 mb-2">Location</p>
-                <p className="text-lg font-light text-brand-white/80 leading-relaxed max-w-xs">
-                  {CAFE_INFO.address}
-                </p>
-                <a
-                  href={CAFE_INFO.googleMapsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-white hover:underline group"
-                >
-                  Get Directions <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </a>
-              </div>
-            </div>
 
-            <div className="flex gap-6">
-              <div className="p-3 bg-brand-white/5 rounded-lg h-fit text-brand-white">
-                <Clock size={24} />
+              <div className="flex gap-4 md:gap-6">
+                <div className="p-3 bg-brand-white/5 rounded-lg h-fit text-brand-white scale-90 md:scale-100">
+                  <Clock size={20} />
+                </div>
+                <div className="w-full">
+                  <p className="text-[10px] uppercase tracking-widest text-brand-white/40 mb-1">Hours</p>
+                  <div className="space-y-1.5">
+                    {CAFE_INFO.hours.map((h, i) => (
+                      <div key={i} className="flex justify-between max-w-xs text-sm md:text-lg text-brand-white/80 font-light">
+                        <span>{h.day}</span>
+                        <span>{h.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="w-full">
-                <p className="text-xs uppercase tracking-widest text-brand-white/40 mb-2">Hours</p>
-                <div className="space-y-2">
-                  {CAFE_INFO.hours.map((h, i) => (
-                    <div key={i} className="flex justify-between max-w-xs text-brand-white/80 font-light">
-                      <span>{h.day}</span>
-                      <span>{h.time}</span>
-                    </div>
-                  ))}
+
+              <div className="flex gap-4 md:gap-6">
+                <div className="p-3 bg-brand-white/5 rounded-lg h-fit text-brand-white scale-90 md:scale-100">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-brand-white/40 mb-1">Connect</p>
+                  <p className="text-base md:text-lg font-light text-brand-white/80">
+                    {CAFE_INFO.phone}
+                  </p>
                 </div>
               </div>
             </div>
-
-            <div className="flex gap-6">
-              <div className="p-3 bg-brand-white/5 rounded-lg h-fit text-brand-white">
-                <Phone size={24} />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-brand-white/40 mb-2">Connect</p>
-                <p className="text-lg font-light text-brand-white/80">
-                  {CAFE_INFO.phone}
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -111,7 +112,8 @@ export default function LocationSection() {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }
 

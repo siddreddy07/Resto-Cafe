@@ -1,94 +1,98 @@
-import { motion } from "motion/react";
-import { ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { ChevronRight, Sparkles } from "lucide-react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
-  return (
-    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-brand-black">
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+  const containerRef = useRef(null);
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-      {/* Abstract Architectural Background */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-           initial={{ scale: 1.1, opacity: 0 }}
-           animate={{ scale: 1, opacity: 0.5 }}
-           transition={{ duration: 4, ease: [0.16, 1, 0.3, 1] }}
-           className="h-full w-full"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=2600"
-            alt="Wild Goat Culinary Experience"
-            className="h-full w-full object-cover brightness-50"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-brand-black/40 mix-blend-multiply" />
+  return (
+    <section ref={containerRef} className="relative min-h-screen w-full bg-brand-black overflow-hidden flex flex-col justify-center">
+      {/* Decorative Blur Backgrounds */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <motion.div 
+          animate={{ x: [0, 50, 0], y: [0, 20, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-brand-accent/30 rounded-full blur-[150px]"
+        />
+        <motion.div 
+          animate={{ x: [0, -40, 0], y: [0, -30, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[#3D2B1F]/40 rounded-full blur-[120px]"
+        />
       </div>
 
-      <div className="relative z-10 text-center px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="mb-8 md:mb-12"
-        >
-          <div className="inline-flex items-center gap-4 px-5 py-2.5 bg-brand-accent/20 border border-brand-accent/30 rounded-full backdrop-blur-xl">
-            <div className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse" />
-            <span className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.4em] text-brand-accent">
-              Premium Resto-Cafe • Jubilee Hills
-            </span>
-          </div>
-        </motion.div>
-
-        <div className="mb-12 flex justify-center">
+      {/* Main Grid Content */}
+      <div className="relative z-10 w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 lg:py-32 flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        
+        {/* Left: Branding & Core Message */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center leading-[0.5] font-display font-black tracking-[-0.11em] select-none text-brand-white mix-blend-difference uppercase"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-8 md:space-y-12"
           >
-            <span className="text-7xl sm:text-9xl -mt-2 md:text-[10vw] lg:text-[10vw] xl:text-[10vw]">WILD</span>
-            <span className="text-7xl sm:text-9xl -mt-2 sm:-mt-2 md:-mt-6 xl:-mt-10 md:text-[10vw] lg:text-[10vw] xl:text-[10vw]">GOAT</span>
+            <div className="flex items-center gap-4">
+              <div className="h-[1px] w-12 bg-brand-accent/40" />
+              <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.5em] text-brand-accent">
+                Hyderabadi Modernity
+              </span>
+            </div>
+
+            <div className="relative">
+              <h1 className="text-6xl sm:text-8xl lg:text-[9vw] font-display font-black leading-[0.85] tracking-[-0.05em] text-brand-white uppercase">
+                THE <br />
+                <span className="text-outline-white text-transparent">WILD</span> <br />
+                GOAT.
+              </h1>
+            </div>
+
+            <div className="flex flex-col xl:flex-row items-start xl:items-center gap-8 lg:gap-10 xl:gap-16">
+              <p className="max-w-xs text-xs md:text-sm font-light text-brand-white/40 leading-relaxed italic border-l border-brand-white/10 pl-6">
+                "Where raw culinary heritage meets the precision of modern roasting. Experience the herd."
+              </p>
+              
+              <Link to="/menu" className="group relative overflow-hidden px-6 py-3.5 md:px-8 md:py-4 bg-brand-white rounded-xl text-brand-black text-[10px] md:text-xs font-black uppercase tracking-widest transition-all shrink-0">
+                <span className="relative z-10 flex items-center gap-3">
+                  Discover Menu <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              </Link>
+            </div>
           </motion.div>
         </div>
 
-        <motion.div
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ delay: 1, duration: 1.5 }}
-           className="flex flex-col items-center gap-10 md:gap-14"
-        >
-          <div className="h-px w-24 bg-brand-white/20" />
-          <p className="max-w-md mx-auto text-[10px] md:text-sm font-black text-brand-white/50 leading-loose uppercase tracking-[0.4em] italic">
-            Artisanal Roasts & Global Culinary Heritage.
-          </p>
-          <div className="flex gap-4">
-            <Link to="/menu" className="group px-10 py-4 bg-brand-accent text-brand-black text-[11px] font-black uppercase tracking-widest rounded-full hover:bg-brand-white transition-all shadow-2xl flex items-center gap-3">
-              Explore Menu
-              <ChevronDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-            </Link>
-          </div>
-        </motion.div>
+        {/* Right: Immersive Image Layer */}
+        <div className="w-full md:w-1/2 h-[35vh] md:h-[40vh] lg:h-[65vh] relative group overflow-visible">
+          <motion.div 
+            style={{ y }}
+            className="relative w-full h-full"
+          >
+            {/* The "Main" Visual */}
+            <div className="relative w-full h-full rounded-2xl md:rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-2xl">
+              <img 
+                src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=2600"
+                alt="Cafe Interior" 
+                className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent" />
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Side HUD Elements */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-12 hidden lg:flex flex-col gap-24 items-center">
-        <div className="w-px h-32 bg-brand-white/10" />
-        <span className="rotate-90 text-[10px] font-black text-brand-white/20 tracking-[0.5em] uppercase whitespace-nowrap">EST. MMXXIII</span>
-      </div>
-
-      <div className="absolute bottom-12 left-12 flex items-end gap-4 overflow-hidden">
-        <span className="text-4xl font-display font-black text-brand-white/10">01</span>
-        <div className="w-12 h-px bg-brand-white/10 mb-2" />
-      </div>
-
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-12 right-12 text-brand-white/20 uppercase tracking-[0.5em] text-[8px] font-black flex items-center gap-4"
-      >
-        DISCOVER <div className="w-4 h-px bg-brand-white/20" />
-      </motion.div>
+      {/* Global Grain Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-[50] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      
+      <style>{`
+        .text-outline-white {
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+        }
+      `}</style>
     </section>
   );
 }

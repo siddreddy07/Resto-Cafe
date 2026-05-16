@@ -1,170 +1,179 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
-import { Coffee, Utensils, Pizza, GlassWater, Cookie, ChefHat, Sparkles, Heart } from "lucide-react";
-
-const LOADING_MESSAGES = [
-  "Awakening the Herd",
-  "Taming the Roast",
-  "Pouring Inspiration",
-  "Grinding for Character",
-  "Steeping in Stillness",
-  "Plating the Soul",
-  "Savouring the Wait"
-];
-
-const LOADING_ICONS = [
-  Coffee,
-  ChefHat,
-  Sparkles,
-  Utensils,
-  Cookie,
-  Heart
-];
 
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-  const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(true);
-  const [msgIndex, setMsgIndex] = useState(0);
-  const [iconIndex, setIconIndex] = useState(0);
+  const [phase, setPhase] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          clearInterval(timer);
-          // Smoother sequence: shorter wait before fade, then complete
-          setTimeout(() => {
-            setShow(false);
-            // Wait for the exit duration to complete before calling onComplete
-            setTimeout(onComplete, 1200);
-          }, 400);
-          return 100;
-        }
-        
-        const diff = Math.random() * 6; // Slower, more "brewed" pace
-        const next = Math.min(oldProgress + diff, 100);
-        
-        const nextMsg = Math.floor((next / 100) * LOADING_MESSAGES.length);
-        if (nextMsg < LOADING_MESSAGES.length) setMsgIndex(nextMsg);
-        
-        const nextIcon = Math.floor((next / 100) * LOADING_ICONS.length);
-        if (nextIcon < LOADING_ICONS.length) setIconIndex(nextIcon);
-        
-        return next;
+    // Smoother progress bar simulation
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) return 100;
+        // Slow down at the end for "preparation" feel
+        const step = prev > 80 ? 0.2 : 0.8;
+        return Math.min(prev + step, 100);
       });
-    }, 120);
+    }, 30);
 
-    return () => clearInterval(timer);
+    // Phase Timeline synchronized with approximate progress
+    const t1 = setTimeout(() => setPhase(1), 800);  
+    const t2 = setTimeout(() => setPhase(2), 1400); 
+    const t3 = setTimeout(() => setPhase(3), 2200); 
+    const t4 = setTimeout(() => {
+      setPhase(4); 
+      setTimeout(() => {
+        setShow(false);
+        setTimeout(onComplete, 1000);
+      }, 800);
+    }, 4800);
+
+    return () => {
+      clearInterval(interval);
+      [t1, t2, t3, t4].forEach(clearTimeout);
+    };
   }, [onComplete]);
 
-  const CurrentIcon = LOADING_ICONS[iconIndex];
+  const welcomeText = "Crafting your experience...";
 
   return (
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ opacity: 1 }}
+          className="fixed inset-0 z-[300] bg-brand-black flex flex-col items-center justify-center overflow-hidden"
           exit={{ 
-            opacity: 0,
+            opacity: 0, 
             scale: 1.05,
-            filter: "blur(20px)",
-            transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } 
+            filter: "blur(10px)",
+            transition: { duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] } 
           }}
-          className="fixed inset-0 z-[100] bg-[#0A0908] flex flex-col items-center justify-center p-6 overflow-hidden"
         >
-          {/* Subtle Texture */}
-          <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+          {/* Sophisticated Parallax Background */}
+          <motion.div 
+            style={{ 
+              scale: 1.1,
+              x: (progress - 50) * 0.2, // Subtle horizontal drift
+              y: (progress - 50) * 0.1  // Subtle vertical drift
+            }}
+            className="absolute inset-0 z-0 opacity-20 pointer-events-none"
+          >
+            <img 
+              src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=2000" 
+              alt="Cafe Texture"
+              className="w-full h-full object-cover grayscale brightness-50 contrast-125"
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+
+          {/* Cinematic Light Leak */}
+          <motion.div 
+            animate={{ 
+              x: ["-100%", "100%"],
+              opacity: [0, 0.15, 0]
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 bottom-0 w-[60vw] bg-gradient-to-r from-transparent via-brand-accent/5 to-transparent skew-x-12 blur-[120px] pointer-events-none z-10"
+          />
+
+          {/* Top Shutter */}
+          <motion.div 
+            initial={{ y: 0 }}
+            animate={{ y: phase === 4 ? "-100%" : 0 }}
+            transition={{ duration: 1.2, ease: [0.85, 0, 0.15, 1] }}
+            className="absolute top-0 left-0 right-0 h-1/2 bg-[#050505] z-[310] border-b border-brand-white/5"
+          />
           
-          {/* Central Experience */}
-          <div className="relative flex flex-col items-center max-w-sm w-full gap-24">
-            {/* The "Vessel" */}
-            <div className="relative w-32 h-32 flex items-center justify-center">
-              {/* Coffee Stream / Steam */}
-              <div className="absolute top-[-100px] w-[1px] h-20 bg-gradient-to-b from-transparent via-brand-accent/20 to-brand-accent/40" />
-              
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={iconIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-brand-accent"
-                >
-                  <CurrentIcon size={40} strokeWidth={1.5} />
-                </motion.div>
-              </AnimatePresence>
+          {/* Bottom Shutter */}
+          <motion.div 
+            initial={{ y: 0 }}
+            animate={{ y: phase === 4 ? "100%" : 0 }}
+            transition={{ duration: 1.2, ease: [0.85, 0, 0.15, 1] }}
+            className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#050505] z-[310] border-t border-brand-white/5"
+          />
 
-              {/* Liquid Level Indicator (Creative Progress) */}
-              <div className="absolute bottom-0 w-16 h-[2px] bg-brand-white/10 overflow-hidden">
-                <motion.div 
-                  className="h-full bg-brand-accent shadow-[0_0_10px_#FFFF00]"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-
-              {/* Rising Aroma Particles */}
-              {[...Array(4)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ y: 0, opacity: 0 }}
-                  animate={{ 
-                    y: -120, 
-                    opacity: [0, 0.4, 0],
-                    x: (i - 1.5) * 20
-                  }}
-                  transition={{ 
-                    duration: 2.5, 
-                    repeat: Infinity, 
-                    delay: i * 0.5,
-                    ease: "easeOut"
-                  }}
-                  className="absolute bottom-4"
-                >
-                  <Sparkles size={8} className="text-brand-accent/30" />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Poetic Branding */}
-            <div className="text-center space-y-6">
-              <div className="overflow-hidden">
-                <motion.div 
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col items-center leading-[0.5] font-display font-black uppercase tracking-[-0.11em] text-[#FFFFFF]"
-                >
-                  <span className="text-6xl md:text-7xl">WILD</span>
-                  <span className="text-6xl md:text-7xl">GOAT</span>
-                </motion.div>
+          <div className="relative z-[320] flex flex-col items-center">
+            {/* The Brand Reveal */}
+            <div className="flex flex-col items-center space-y-2">
+              <div className="overflow-hidden h-16 md:h-24">
+                <AnimatePresence>
+                  {phase >= 1 && (
+                    <motion.h1 
+                      initial={{ y: "100%", rotateX: -90 }}
+                      animate={{ y: 0, rotateX: 0 }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-6xl md:text-9xl font-display font-black text-brand-white uppercase tracking-tighter leading-none"
+                    >
+                      THE WILD
+                    </motion.h1>
+                  )}
+                </AnimatePresence>
               </div>
               
-              <div className="h-4">
-                <AnimatePresence mode="wait">
-                  <motion.p 
-                    key={msgIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-[9px] font-black uppercase tracking-[0.6em] text-brand-accent/40 italic"
-                  >
-                    {LOADING_MESSAGES[msgIndex]}
-                  </motion.p>
+              <div className="overflow-hidden h-16 md:h-24">
+                <AnimatePresence>
+                  {phase >= 2 && (
+                    <motion.h1 
+                      initial={{ y: "100%", rotateX: -90 }}
+                      animate={{ y: 0, rotateX: 0 }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-6xl md:text-9xl font-display font-black text-brand-white uppercase tracking-tighter leading-none"
+                    >
+                      GOAT
+                    </motion.h1>
+                  )}
                 </AnimatePresence>
               </div>
             </div>
+
+            {/* Cursive Handwriting Effect */}
+            <div className="mt-12 h-12 flex items-center">
+              <div className="flex">
+                {welcomeText.split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, filter: "blur(5px)" }}
+                    animate={phase >= 3 ? { opacity: 0.8, filter: "blur(0px)" } : {}}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: phase >= 3 ? (i * 0.08) : 0,
+                      ease: "easeOut"
+                    }}
+                    className="font-cursive text-3xl md:text-5xl text-brand-accent tracking-normal italic"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+
+            {/* Minimal Progress Bar */}
+            <div className="mt-12 w-48 md:w-64 h-[1px] bg-brand-white/10 relative overflow-hidden">
+               <motion.div 
+                 style={{ scaleX: progress / 100 }}
+                 className="absolute inset-0 bg-brand-accent origin-left"
+               />
+            </div>
           </div>
 
-          {/* Aesthetic Footer */}
-          <div className="absolute bottom-16 left-0 right-0 flex flex-col items-center gap-6">
-             <div className="h-12 w-px bg-gradient-to-b from-brand-white/20 to-transparent" />
-             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/10">Slow Living in Hyderabad</span>
-          </div>
+            {/* Footer Metadata */}
+            <div className="absolute bottom-12 z-[320] flex flex-col items-center gap-3">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-[1px] bg-brand-accent/30" />
+                <span className="text-[10px] font-black tracking-[0.5em] text-brand-white/40 uppercase">
+                  {Math.round(progress)}%
+                </span>
+                <div className="w-8 h-[1px] bg-brand-accent/30" />
+              </div>
+              <span className="text-[9px] font-black tracking-[0.8em] text-brand-white/20 uppercase">
+                HYDERABAD • ESTD 2024
+              </span>
+            </div>
+
+          {/* High-End Texture Overlay */}
+          <div className="absolute inset-0 z-[330] opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
         </motion.div>
       )}
     </AnimatePresence>
-
   );
 }
-

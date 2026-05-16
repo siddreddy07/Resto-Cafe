@@ -35,7 +35,7 @@ export default function MenuSection() {
   }, []);
 
   return (
-    <section id="menu" ref={sectionRef} className="section-padding bg-brand-gray relative">
+    <section id="menu" ref={sectionRef} className="py-16 md:py-32 lg:py-48 bg-brand-gray relative">
       {/* Floating Hover Image - Shown on desktop/tablet */}
       <AnimatePresence>
         {hoveredItem && (
@@ -73,28 +73,28 @@ export default function MenuSection() {
         )}
       </AnimatePresence>
 
-      <div className="flex flex-col items-center mb-16">
+      <div className="flex flex-col items-center mb-6 md:mb-16 px-6 text-center">
         <motion.span
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-xs font-bold tracking-[0.4em] uppercase text-brand-white/40 mb-4"
+          className="text-[9px] md:text-xs font-bold tracking-[0.4em] uppercase text-brand-white/40 mb-2 md:mb-3"
         >
           Resto-Cafe Signatures
         </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-7xl font-display font-black tracking-tighter mb-12"
+          className="text-3xl md:text-7xl font-display font-black tracking-tighter mb-6 md:mb-12"
         >
           THE MENU
         </motion.h2>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8 lg:gap-6 overflow-x-auto pb-4 max-w-full">
+        <div className="flex flex-wrap justify-center gap-1 md:gap-8 lg:gap-6 overflow-x-auto pb-4 max-w-full no-scrollbar">
           {MENU_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`relative px-4 py-2 text-sm lg:text-xs font-bold uppercase tracking-widest transition-all ${
+              className={`relative px-2 py-1.5 text-[9px] md:text-sm lg:text-xs font-bold uppercase tracking-widest transition-all ${
                 activeCategory === cat.id ? "text-brand-white" : "text-brand-white/30 hover:text-brand-white/60"
               }`}
             >
@@ -102,7 +102,7 @@ export default function MenuSection() {
               {activeCategory === cat.id && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-brand-white"
+                  className="absolute bottom-0 left-0 right-0 h-[1px] md:h-1 bg-brand-white"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
@@ -111,29 +111,30 @@ export default function MenuSection() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto px-6">
           <motion.div
             key={activeCategory}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-x-24 lg:gap-x-12 xl:gap-x-16 gap-y-16 lg:gap-y-10 xl:gap-y-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-12 md:gap-x-24 lg:gap-x-12 xl:gap-x-16 gap-y-6 md:gap-y-16 lg:gap-y-10 xl:gap-y-8"
           >
             {MENU_CATEGORIES.find((c) => c.id === activeCategory)?.items.map((item, idx) => (
               <motion.div 
                 key={idx} 
-                className="group relative cursor-pointer"
+                whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.02)" }}
+                className="group relative cursor-pointer p-4 -m-4 rounded-xl transition-colors duration-300"
                 onMouseEnter={() => setHoveredItem({ name: item.name, image: item.image })}
                 onMouseLeave={() => setHoveredItem(null)}
                 onClick={() => setSelectedItem(item)}
               >
-                <div className="flex justify-between items-baseline mb-3 pb-3 border-b border-brand-white/5 group-hover:border-brand-white/40 transition-all duration-500">
-                  <h3 className="text-xl md:text-2xl lg:text-base xl:text-sm font-display font-medium text-brand-white uppercase tracking-tighter group-hover:pl-4 transition-all duration-500">
+                <div className="flex justify-between items-baseline mb-1 pb-1.5 md:mb-3 md:pb-3 border-b border-brand-white/5 group-hover:border-brand-white/40 transition-all duration-500">
+                  <h3 className="text-base md:text-2xl lg:text-base xl:text-sm font-display font-medium text-brand-white uppercase tracking-tighter group-hover:pl-4 transition-all duration-500">
                     {item.name}
                   </h3>
-                  <span className="text-brand-white font-display font-bold text-lg lg:text-sm xl:text-xs">₹{item.price}</span>
+                  <span className="text-brand-white font-display font-bold text-[13px] md:text-lg lg:text-sm xl:text-xs">₹{item.price}</span>
                 </div>
-                <p className="text-sm lg:text-xs font-light text-brand-white/40 leading-relaxed italic group-hover:text-brand-white/70 transition-colors">
+                <p className="text-[11px] lg:text-xs font-light text-brand-white/30 leading-relaxed italic group-hover:text-brand-white/70 transition-colors">
                   {item.description}
                 </p>
               </motion.div>
@@ -141,22 +142,22 @@ export default function MenuSection() {
           </motion.div>
       </div>
 
-      <div className="mt-24 flex flex-col items-center gap-8">
+      <div className="mt-16 md:mt-24 flex flex-col items-center gap-6 md:gap-8">
         <motion.div
            whileHover={{ scale: 1.05 }}
            className="relative group"
         >
           <Link 
             to="/menu" 
-            className="flex items-center gap-4 px-12 py-6 bg-brand-white text-brand-black rounded-full text-[10px] font-black uppercase tracking-[0.4em] transition-all hover:bg-brand-accent shadow-[0_20px_50px_rgba(255,255,255,0.1)] group-hover:shadow-brand-accent/30"
+            className="flex items-center gap-3 md:gap-4 px-6 py-3.5 md:px-12 md:py-6 bg-brand-white text-brand-black rounded-full text-[9px] font-black uppercase tracking-[0.4em] transition-all hover:bg-brand-accent shadow-[0_20px_50px_rgba(255,255,255,0.1)] group-hover:shadow-brand-accent/30"
           >
             Explore Interactive Menu
-            <ChevronRight size={16} className="group-hover:translate-x-2 transition-transform" />
+            <ChevronRight size={14} className="group-hover:translate-x-2 transition-transform md:w-4 md:h-4" />
           </Link>
         </motion.div>
         
-        <p className="text-[10px] text-brand-white/30 uppercase tracking-[0.2em] font-bold">
-          High-Definition Textures & Handcrafted Flavors
+        <p className="text-[8px] md:text-[10px] text-brand-white/30 uppercase tracking-[0.2em] font-bold">
+          Artisanal Textures & Handcrafted Flavors
         </p>
       </div>
 
@@ -167,25 +168,25 @@ export default function MenuSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-brand-black/90 backdrop-blur-xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-brand-black/95 backdrop-blur-xl"
             onClick={() => setSelectedItem(null)}
           >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-brand-gray/50 border border-brand-white/10 p-4 md:p-8 lg:p-6 xl:p-4 rounded-[2rem] max-w-2xl lg:max-w-lg xl:max-w-md w-full relative overflow-hidden"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-brand-gray/80 border border-brand-white/10 p-4 md:p-8 rounded-2xl md:rounded-[2rem] max-w-[340px] sm:max-w-sm md:max-w-2xl lg:max-w-lg xl:max-w-md w-full relative overflow-hidden shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button 
                   onClick={() => setSelectedItem(null)}
-                  className="absolute top-6 right-6 z-10 w-8 h-8 md:w-10 md:h-10 bg-brand-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-brand-white hover:bg-brand-white hover:text-brand-black transition-all"
+                  className="absolute top-3 right-3 md:top-6 md:right-6 z-10 w-8 h-8 md:w-10 md:h-10 bg-brand-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-brand-white hover:bg-brand-white hover:text-brand-black transition-all"
                 >
-                  <ChevronRight className="rotate-180 w-4 h-4 md:w-5 md:h-5" />
+                  <ChevronRight className="rotate-180 w-3 h-3 md:w-5 md:h-5" />
                 </button>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-6 xl:gap-4 items-center">
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center">
+                  <div className="aspect-[1.2/1] md:aspect-[4/5] rounded-xl overflow-hidden shadow-lg">
                     <img 
                       src={selectedItem.image} 
                       alt={selectedItem.name} 
@@ -193,19 +194,19 @@ export default function MenuSection() {
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className="space-y-6 lg:space-y-4">
+                  <div className="space-y-3 md:space-y-6">
                     <div>
-                      <span className="text-[10px] lg:text-[8px] font-black tracking-[0.5em] uppercase text-brand-accent">Wild Selection</span>
-                      <h3 className="text-3xl md:text-4xl lg:text-2xl xl:text-xl font-display font-black text-brand-white uppercase mt-2 tracking-tighter">
+                      <span className="text-[8px] md:text-[9px] font-black tracking-[0.4em] md:tracking-[0.5em] uppercase text-brand-accent">Wild Selection</span>
+                      <h3 className="text-xl md:text-4xl lg:text-2xl xl:text-xl font-display font-black text-brand-white uppercase mt-1 tracking-tighter leading-none">
                         {selectedItem.name}
                       </h3>
                     </div>
-                    <p className="text-brand-white/60 text-base md:text-lg lg:text-sm xl:text-xs italic leading-relaxed">
+                    <p className="text-brand-white/50 text-[11px] md:text-lg lg:text-sm xl:text-xs italic leading-snug lg:leading-relaxed">
                       "{selectedItem.description}"
                     </p>
-                    <div className="pt-6 lg:pt-4 border-t border-brand-white/10 flex justify-between items-center">
-                      <span className="text-[10px] lg:text-[8px] font-black uppercase tracking-[0.3em] text-brand-white/40">Value</span>
-                      <span className="text-2xl lg:text-xl xl:text-lg font-display font-bold text-brand-white">₹{selectedItem.price}</span>
+                    <div className="pt-3 md:pt-6 border-t border-brand-white/10 flex justify-between items-center">
+                      <span className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] text-brand-white/30">Value</span>
+                      <span className="text-lg md:text-2xl lg:text-xl xl:text-lg font-display font-bold text-brand-white">₹{selectedItem.price}</span>
                     </div>
                   </div>
                 </div>

@@ -7,32 +7,32 @@ export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <section className="bg-brand-black py-24 md:py-48 lg:py-64 overflow-hidden border-t border-brand-white/5 relative">
-      <div className="px-6 md:px-12 lg:px-24 mb-16 md:mb-24 relative z-10">
-         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-12">
+    <section className="bg-brand-black py-16 md:py-48 lg:py-64 overflow-hidden border-t border-brand-white/5 relative">
+      <div className="px-6 md:px-12 lg:px-24 mb-12 md:mb-24 relative z-10">
+         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 md:gap-12">
             <div className="text-center md:text-left">
-              <span className="text-[10px] font-black tracking-[1.5em] text-brand-accent uppercase mb-6 md:mb-8 block italic">Curated Exhibition</span>
-              <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter uppercase whitespace-pre-line leading-[0.7] text-brand-white mix-blend-difference">
+              <span className="text-[10px] font-black tracking-[1.5em] text-brand-accent uppercase mb-4 md:mb-8 block italic">Curated Exhibition</span>
+              <h2 className="text-4xl sm:text-7xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter uppercase whitespace-pre-line leading-[0.7] text-brand-white mix-blend-difference">
                 THE <br /> ARCHIVE.
               </h2>
             </div>
-            <p className="text-xs md:text-sm font-mono text-brand-white/30 max-w-sm leading-relaxed italic text-center md:text-right">
+            <p className="text-[10px] md:text-sm font-mono text-brand-white/30 max-w-sm leading-relaxed italic text-center md:text-right">
               "A culinary journal capturing the intersection of raw nature, elevated taste, and modern urbanity."
             </p>
          </div>
       </div>
       
       {/* Infinite Marquee Experience */}
-      <div className="space-y-12 md:space-y-24 lg:space-y-32">
+      <div className="space-y-8 md:space-y-24 lg:space-y-32">
         {/* Row 1: Fast & Bold */}
         <div className="relative flex overflow-hidden">
-          <div className="animate-marquee whitespace-nowrap flex gap-6 md:gap-16 lg:gap-24 px-4">
+          <div className="animate-marquee whitespace-nowrap flex gap-4 md:gap-16 lg:gap-24 px-4">
             {[...GALLERY_ROW_1, ...GALLERY_ROW_1].map((img, idx) => (
               <motion.div
                 key={`r1-${idx}`}
-                whileHover={{ y: -15, scale: 1.02 }}
+                whileHover={{ y: -10, scale: 1.01 }}
                 onClick={() => setSelectedImage(img + '|' + idx)}
-                className="inline-block w-[80vw] sm:w-[60vw] md:w-[700px] lg:w-[1000px] aspect-[16/9] md:aspect-[21/9] rounded-[2rem] md:rounded-[4rem] overflow-hidden group cursor-none relative shadow-2xl"
+                className="inline-block w-[65vw] sm:w-[50vw] md:w-[700px] lg:w-[1000px] aspect-video md:aspect-[21/9] rounded-lg md:rounded-[4rem] overflow-hidden group cursor-none relative shadow-2xl"
               >
                 <img 
                   src={img} 
@@ -56,13 +56,13 @@ export default function GallerySection() {
 
         {/* Row 2: Slower & Atmospheric */}
         <div className="relative flex overflow-hidden">
-          <div className="animate-marquee-reverse whitespace-nowrap flex gap-6 md:gap-16 lg:gap-24 px-4">
+          <div className="animate-marquee-reverse whitespace-nowrap flex gap-4 md:gap-16 lg:gap-24 px-4">
             {[...GALLERY_ROW_2, ...GALLERY_ROW_2].map((img, idx) => (
               <motion.div
                 key={`r2-${idx}`}
-                whileHover={{ y: -15, scale: 1.02 }}
+                whileHover={{ y: -10, scale: 1.01 }}
                 onClick={() => setSelectedImage(img + '|' + (idx + 100))}
-                className="inline-block w-[70vw] sm:w-[50vw] md:w-[600px] lg:w-[800px] aspect-[16/9] md:aspect-[21/9] rounded-[2rem] md:rounded-[4rem] overflow-hidden group cursor-none relative shadow-2xl"
+                className="inline-block w-[55vw] sm:w-[50vw] md:w-[600px] lg:w-[800px] aspect-video md:aspect-[21/9] rounded-lg md:rounded-[4rem] overflow-hidden group cursor-none relative shadow-2xl"
               >
                 <img 
                   src={img} 
