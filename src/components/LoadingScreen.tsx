@@ -94,36 +94,18 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
 
           <div className="relative z-[320] flex flex-col items-center">
             {/* The Brand Reveal */}
-            <div className="flex flex-col items-center space-y-2">
-              <div className="overflow-hidden h-20 md:h-44 flex items-center">
-                <AnimatePresence>
-                  {phase >= 1 && (
-                    <motion.h1 
-                      initial={{ y: "100%", rotateX: -90 }}
-                      animate={{ y: 0, rotateX: 0 }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className="text-6xl md:text-9xl font-display font-black text-brand-white uppercase tracking-tighter leading-none"
-                    >
-                      THE WILD
-                    </motion.h1>
-                  )}
-                </AnimatePresence>
-              </div>
-              
-              <div className="overflow-hidden h-20 md:h-44 flex items-center">
-                <AnimatePresence>
-                  {phase >= 2 && (
-                    <motion.h1 
-                      initial={{ y: "100%", rotateX: -90 }}
-                      animate={{ y: 0, rotateX: 0 }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className="text-6xl md:text-9xl font-display font-black text-brand-white uppercase tracking-tighter leading-none"
-                    >
-                      GOAT
-                    </motion.h1>
-                  )}
-                </AnimatePresence>
-              </div>
+            <div className="overflow-hidden flex items-center justify-center">
+              <AnimatePresence>
+                {phase >= 1 && (
+                  <motion.div
+                    initial={{ y: "100%", rotateX: -90, opacity: 0 }}
+                    animate={{ y: 0, rotateX: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <img src="/WildGoat.png" alt="Wild Goat" className="h-24 md:h-52 w-auto" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Cursive Handwriting Effect */}
