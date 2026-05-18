@@ -37,6 +37,18 @@
   transform: rotate(180deg);
 }
 
+::selection {
+  @apply bg-brand-white text-brand-black;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

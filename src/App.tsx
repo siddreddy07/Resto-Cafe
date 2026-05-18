@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -18,6 +18,14 @@ import CustomCursor from "./components/CustomCursor";
 import LoadingScreen from "./components/LoadingScreen";
 import FullMenu from "./pages/FullMenu";
 import { useEffect, useState } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function HomePage() {
   return (
@@ -73,6 +81,7 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="relative overflow-x-hidden selection:bg-brand-white selection:text-brand-black">
         <LoadingScreen onComplete={() => setIsLoading(false)} />
         
