@@ -8,7 +8,7 @@ export const CAFE_INFO = {
     { day: "Mon - Thu", time: "11:00 AM - 11:00 PM" },
     { day: "Fri - Sun", time: "11:00 AM - 12:00 AM" },
   ],
-  phone: "+91 91212 91212",
+  phone: "+91 912*** ***12",
   instagram: "restocafehyd",
 };
 
