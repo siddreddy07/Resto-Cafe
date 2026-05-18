@@ -44,10 +44,12 @@ export default function Hero() {
             </div>
 
             <div className="relative">
-              <img src="/WildGoat.png" alt="Wild Goat" className="h-20 sm:h-28 lg:h-[9vw] w-auto" />
+              <div className="flex items-center justify-center sm:justify-start">
+              <img src="/WildGoat.png" alt="Wild Goat" className="h-32 items-center sm:h-48 lg:h-[22vw] w-auto" />
+              </div>
             </div>
 
-            <div className="flex flex-col xl:flex-row items-start xl:items-center gap-8 lg:gap-10 xl:gap-16">
+            <div className="flex flex-col xl:flex-row items-center sm:items-start xl:items-center gap-8 lg:gap-10 xl:gap-16">
               <p className="max-w-xs text-xs md:text-sm font-light text-brand-white/40 leading-relaxed italic border-l border-brand-white/10 pl-6">
                 "Where raw culinary heritage meets the precision of modern roasting. Experience the herd."
               </p>

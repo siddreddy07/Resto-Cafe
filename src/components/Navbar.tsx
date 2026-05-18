@@ -38,10 +38,10 @@ export default function Navbar() {
           </Link>
           <div className="hidden md:flex items-center gap-6 lg:gap-8 text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/40">
             <Link to="/" className="hover:text-brand-white transition-all whitespace-nowrap">Home</Link>
-            <Link to="/menu" className="hover:text-brand-white transition-all flex items-center gap-2 whitespace-nowrap">
+            {/* <Link to="/menu" className="hover:text-brand-white transition-all flex items-center gap-2 whitespace-nowrap">
               <Wine size={14} className="text-brand-accent" />
               Menu
-            </Link>
+            </Link> */}
             <a href="#about" className="hover:text-brand-white transition-all whitespace-nowrap">About</a>
             <a href="#location" className="hover:text-brand-white transition-all whitespace-nowrap">Location</a>
           </div>

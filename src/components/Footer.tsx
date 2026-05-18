@@ -56,11 +56,11 @@ export default function Footer() {
             </div>
             
             <div className="flex items-center gap-4 text-brand-white/10 select-none pointer-events-none">
-              <img src="/WildGoat.png" alt="Wild Goat" className="h-6 w-auto opacity-30" />
+              <img src="/WildGoat.png" alt="Wild Goat" className="h-24 w-auto opacity-100" />
             </div>
           </div>
           <div className="hidden md:flex absolute -bottom-10 left-0 select-none pointer-events-none">
-            <img src="/WildGoat.png" alt="Wild Goat" className="h-[12vw] lg:h-[10vw] xl:h-[8vw] w-auto opacity-[0.015]" />
+            <img src="/WildGoat.png" alt="Wild Goat" className="h-[12vw] lg:h-[10vw] xl:h-[8vw] w-auto opacity-20" />
           </div>
         </div>
       </div>
