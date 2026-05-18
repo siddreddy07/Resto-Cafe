@@ -44,11 +44,7 @@ export default function Hero() {
             </div>
 
             <div className="relative">
-              <h1 className="text-6xl sm:text-8xl lg:text-[9vw] font-display font-black leading-[0.85] tracking-[-0.05em] text-brand-white uppercase">
-                THE <br />
-                <span className="text-outline-white text-transparent">WILD</span> <br />
-                GOAT.
-              </h1>
+              <img src="/WildGoat.png" alt="Wild Goat" className="h-20 sm:h-28 lg:h-[9vw] w-auto" />
             </div>
 
             <div className="flex flex-col xl:flex-row items-start xl:items-center gap-8 lg:gap-10 xl:gap-16">
@@ -88,11 +84,7 @@ export default function Hero() {
       {/* Global Grain Overlay */}
       <div className="fixed inset-0 pointer-events-none z-[50] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       
-      <style>{`
-        .text-outline-white {
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
-        }
-      `}</style>
+
     </section>
   );
 }
