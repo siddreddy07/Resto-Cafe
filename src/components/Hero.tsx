@@ -45,7 +45,7 @@ export default function Hero() {
 
             <div className="relative">
               <div className="flex items-center justify-center sm:justify-start">
-              <img src="/WildGoat.png" alt="Wild Goat" className="h-32 items-center sm:h-48 lg:h-[22vw] w-auto" />
+              <span className="text-6xl sm:text-8xl lg:text-[12vw] font-display font-black tracking-tighter text-brand-white uppercase">Resto Cafe</span>
               </div>
             </div>
 

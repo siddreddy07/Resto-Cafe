@@ -56,7 +56,7 @@ export default function Navbar() {
                rel="noopener noreferrer"
                className="text-[10px] font-black uppercase tracking-widest text-brand-white/60 hover:text-brand-white transition-colors"
              >
-               Jubilee Hills
+               Connaught Place
              </a>
           </div>
           
@@ -208,7 +208,7 @@ export default function Navbar() {
                  className="h-[1px] bg-brand-accent/30"
                />
                <div className="flex flex-col items-center">
-                 <span className="text-[10px] font-black tracking-[0.8em] text-brand-white/40 uppercase mb-1">Jubilee Hills</span>
+                 <span className="text-[10px] font-black tracking-[0.8em] text-brand-white/40 uppercase mb-1">Connaught Place</span>
                  <span className="text-[8px] font-mono text-brand-white/10 uppercase tracking-widest">Hyd • 2024</span>
                </div>
             </div>

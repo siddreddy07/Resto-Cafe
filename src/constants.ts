@@ -1,15 +1,15 @@
 export const CAFE_INFO = {
-  name: "Wild Goat",
+  name: "Resto Cafe",
   tagline: "Stay Wild. Sip Slow.",
-  address: "Road 45, Jubilee Hills, Hyderabad, Telangana",
-  coordinates: { lat: 17.4433922, lng: 78.3963576 },
-  googleMapsLink: "https://www.google.com/maps/place/Wild+Goat/@17.4433922,78.3963576,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb91900b59abe1:0x5005ab822407ecec!8m2!3d17.4433922!4d78.3963576!16s%2Fg%2F11tnk44vgx",
+  address: "Connaught Place, New Delhi, Delhi 110001",
+  coordinates: { lat: 28.6315, lng: 77.2167 },
+  googleMapsLink: "https://www.google.com/maps/place/Connaught+Place,+New+Delhi,+Delhi+110001/@28.6315,77.2167,17z",
   hours: [
     { day: "Mon - Thu", time: "11:00 AM - 11:00 PM" },
     { day: "Fri - Sun", time: "11:00 AM - 12:00 AM" },
   ],
   phone: "+91 91212 91212",
-  instagram: "wildgoathyd",
+  instagram: "restocafehyd",
 };
 
 export const MENU_CATEGORIES = [
@@ -17,7 +17,7 @@ export const MENU_CATEGORIES = [
     id: "specialty-coffee",
     name: "Specialty Coffee",
     items: [
-      { name: "Wild Cortado", price: "240", description: "Double shot espresso with equal parts textured milk.", image: "https://images.unsplash.com/photo-1534706936160-d5ee67737249?auto=format&fit=crop&q=80&w=600" },
+      { name: "Resto Cortado", price: "240", description: "Double shot espresso with equal parts textured milk.", image: "https://images.unsplash.com/photo-1534706936160-d5ee67737249?auto=format&fit=crop&q=80&w=600" },
       { name: "Single Origin Cold Brew", price: "280", description: "Steeped for 18 hours, smooth and chocolatey notes.", image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=600" },
       { name: "Rosemary Latte", price: "320", description: "Infused with fresh rosemary and local honey.", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&q=80&w=600" },
       { name: "Tonic Espresso", price: "300", description: "Espresso, artisanal tonic water, and a twist of orange.", image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&q=80&w=600" },
@@ -39,7 +39,7 @@ export const MENU_CATEGORIES = [
     items: [
       { name: "Pesto Genovese Pasta", price: "550", description: "Handmade fettuccine, basil pesto, and parmesan.", image: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&q=80&w=600" },
       { name: "Cajun Chicken Bowl", price: "580", description: "Grilled chicken, quinoa, and tahini dressing.", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600" },
-      { name: "Wild Goat Slider Duo", price: "620", description: "Pulled lamb and spicy paneer sliders.", image: "https://images.unsplash.com/photo-1521305916504-4a1121188589?auto=format&fit=crop&q=80&w=600" },
+      { name: "Resto Slider Duo", price: "620", description: "Pulled lamb and spicy paneer sliders.", image: "https://images.unsplash.com/photo-1521305916504-4a1121188589?auto=format&fit=crop&q=80&w=600" },
     ],
   },
 ];

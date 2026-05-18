@@ -36,7 +36,7 @@ export default function AboutSection() {
                 CRAFTED FOR <br /> THE RAW <br /> SOUL.
               </h2>
               <p className="text-brand-white/50 text-sm md:text-xl leading-relaxed font-light italic border-l-2 border-brand-accent/20 pl-4 md:pl-8 mx-auto max-w-2xl">
-                "Wild Goat isn't just a space; it's a culinary rejection of the mundane. We strip back the noise to reveal the soul of global cuisine and the depth of the bean."
+                "Resto Cafe isn't just a space; it's a culinary rejection of the mundane. We strip back the noise to reveal the soul of global cuisine and the depth of the bean."
               </p>
             </div>
             

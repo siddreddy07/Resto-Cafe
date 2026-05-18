@@ -1,9 +1,9 @@
 <div align="center">
 </div>
 
-# Wild Goat - Resto Cafe
+# Resto Cafe
 
-A stunning, minimalist website for Wild Goat, a premier resto-cafe in Hyderabad featuring a curated menu, modern aesthetics, and a vibrant atmosphere.
+A stunning, minimalist website for Resto Cafe, a premier resto-cafe in Hyderabad featuring a curated menu, modern aesthetics, and a vibrant atmosphere.
 
 ## Run Locally
 

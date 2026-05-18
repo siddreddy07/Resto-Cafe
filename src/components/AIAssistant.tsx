@@ -54,7 +54,7 @@ export default function AIAssistant() {
       
       const menuContext = JSON.stringify(MENU_CATEGORIES);
       const systemInstruction = `
-        You are "Wild Scout", the AI concierge for "Wild Goat", a minimalist resto-cafe in Hyderabad.
+        You are "Resto Scout", the AI concierge for "Resto Cafe", a minimalist resto-cafe in Hyderabad.
         Recommend something to eat or drink based on this context. Be stylish, minimalist, and concise.
         Focus on the vibe of the resto-cafe: global cuisine, specialty coffee, and raw design.
         Menu Categories provided as context: ${menuContext}
@@ -69,7 +69,7 @@ export default function AIAssistant() {
 
         NAVIGATION:
         Whenever you recommend a specific dish or drink, you MUST include a clickable reference to its category at the end of your response using this EXACT format: [Explore {CategoryName}](#{category-id}).
-        Example: "I recommend the Wild Cortado. [Explore Specialty Coffee](#specialty-coffee)"
+        Example: "I recommend the Resto Cortado. [Explore Specialty Coffee](#specialty-coffee)"
       `;
 
       const chatCompletion = await groq.chat.completions.create({
@@ -189,7 +189,7 @@ export default function AIAssistant() {
                   <Command size={16} className="text-brand-black" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-white">Wild Scout</h4>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-white">Resto Scout</h4>
                   <p className="text-[10px] text-brand-white/40 uppercase tracking-widest">AI Concierge</p>
                 </div>
               </div>

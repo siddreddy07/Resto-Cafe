@@ -17,7 +17,7 @@ export default function LocationSection() {
               Visit Us
             </span>
             <h2 className="text-3xl sm:text-5xl md:text-7xl font-display font-black tracking-tighter mb-8 md:mb-12 leading-tight uppercase text-brand-white">
-              HYDERABAD <br className="hidden md:block" /> 400 036
+              NEW DELHI <br className="hidden md:block" /> 110 001
             </h2>
 
             <div className="space-y-8 md:space-y-12">

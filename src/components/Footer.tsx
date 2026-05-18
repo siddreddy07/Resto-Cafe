@@ -21,15 +21,15 @@ export default function Footer() {
               <div className="space-y-4">
                  <p className="text-brand-accent/60 uppercase tracking-[0.4em] text-[10px] font-black">The Coordinates</p>
                  <div className="text-sm md:text-base font-medium uppercase tracking-widest text-brand-white/40 leading-relaxed">
-                   <p>Jubilee Hills, Road 45</p>
-                   <p>Hyderabad, TS 500033</p>
+                    <p>Connaught Place</p>
+                    <p>New Delhi, DL 110001</p>
                  </div>
               </div>
               <div className="space-y-4">
                  <p className="text-brand-accent/60 uppercase tracking-[0.4em] text-[10px] font-black">The Connection</p>
                  <div className="text-sm md:text-base font-medium uppercase tracking-widest text-brand-white/40 leading-relaxed">
                    <p>{CAFE_INFO.phone}</p>
-                   <p>hello@wildgoat.com</p>
+                    <p>hello@restocafe.com</p>
                  </div>
               </div>
             </div>

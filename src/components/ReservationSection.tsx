@@ -85,7 +85,7 @@ export default function ReservationSection() {
                   </div>
                   <div className="space-y-1">
                      <span className="text-[8px] font-black tracking-widest text-brand-white/30 uppercase">Destination</span>
-                     <p className="text-sm font-display font-bold text-brand-white/70">JUBILEE HILLS</p>
+                     <p className="text-sm font-display font-bold text-brand-white/70">CONNAUGHT PLACE</p>
                   </div>
                </div>
             </div>
@@ -137,7 +137,7 @@ export default function ReservationSection() {
                    <span className="text-[10px] font-black tracking-[0.8em] text-brand-accent uppercase italic">The Invitation</span>
                 </div>
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-black tracking-tighter uppercase text-brand-white leading-none">BOOK YOUR EXPERIENCE.</h3>
-                <p className="text-[10px] md:text-xs font-mono text-brand-white/20 italic tracking-tight">Experience the sensory legacy of Jubilee Hills.</p>
+                 <p className="text-[10px] md:text-xs font-mono text-brand-white/20 italic tracking-tight">Experience the sensory legacy of Connaught Place.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5 md:space-y-10">
@@ -218,7 +218,7 @@ export default function ReservationSection() {
               </form>
               
               <div className="pt-8 md:pt-12 flex justify-between items-center opacity-30">
-                 <p className="text-[8px] md:text-[10px] font-black tracking-widest text-brand-white uppercase italic">Wild Goat / Jubilee Hills</p>
+                  <p className="text-[8px] md:text-[10px] font-black tracking-widest text-brand-white uppercase italic">Resto Cafe / Connaught Place</p>
                  <div className="h-[1px] flex-grow mx-4 md:mx-8 bg-brand-white/20" />
                  <p className="text-[8px] md:text-[10px] font-mono text-brand-white uppercase">©2026</p>
               </div>
