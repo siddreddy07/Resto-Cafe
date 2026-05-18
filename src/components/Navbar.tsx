@@ -34,7 +34,7 @@ export default function Navbar() {
       >
         <div className="flex items-center gap-10 lg:gap-16">
           <Link to="/" className="flex items-center hover:opacity-80 transition-all shrink-0">
-            <img src="/WildGoat.png" alt="Wild Goat" className="h-10 md:h-12 w-auto" />
+            <span className="text-xl md:text-2xl font-display font-black tracking-tight text-brand-white uppercase">Resto Cafe</span>
           </Link>
           <div className="hidden md:flex items-center gap-6 lg:gap-8 text-[10px] font-black uppercase tracking-[0.4em] text-brand-white/40">
             <Link to="/" className="hover:text-brand-white transition-all whitespace-nowrap">Home</Link>

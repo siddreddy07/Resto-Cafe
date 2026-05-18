@@ -79,7 +79,7 @@ export default function LocationSection() {
           transition={{ duration: 1 }}
           className="relative h-[400px] sm:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-brand-white/5 border border-brand-white/10"
         >
-          <div className="absolute inset-0 grayscale hover:grayscale-0 transition-all duration-1000 opacity-80 hover:opacity-100">
+          <div className="absolute inset-0 grayscale blur-sm hover:grayscale-0 hover:blur-none transition-all duration-1000 opacity-80 hover:opacity-100">
             <Map 
               defaultCenter={[CAFE_INFO.coordinates.lat, CAFE_INFO.coordinates.lng]} 
               defaultZoom={16}
@@ -95,7 +95,7 @@ export default function LocationSection() {
                     <MapPin className="text-brand-white w-6 h-6" />
                   </div>
                   <div className="absolute top-14 left-1/2 -translate-x-1/2 bg-brand-black border border-brand-white/10 px-4 py-2 rounded-lg whitespace-nowrap shadow-2xl backdrop-blur-xl">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-brand-white">Wild Goat</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-brand-white">Resto Cafe</p>
                   </div>
                 </div>
               </Marker>

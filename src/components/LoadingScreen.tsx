@@ -102,7 +102,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
                     animate={{ y: 0, rotateX: 0, opacity: 1 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <img src="/WildGoat.png" alt="Wild Goat" className="h-24 md:h-52 w-auto" />
+                    <span className="text-4xl md:text-7xl font-display font-black tracking-tighter text-brand-white uppercase">Resto Cafe</span>
                   </motion.div>
                 )}
               </AnimatePresence>
